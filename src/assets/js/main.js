@@ -1,117 +1,48 @@
-const acais = [
-    {
-        volume:"300ml",
-        precoString:"R$ 10,00",
-        preco: 10.00
-    },
-    {
-        volume:"400ml",
-        precoString:"R$ 12,00",
-        preco: 12.00
-    },
-    {
-        volume:"600ml",
-        precoString:"R$ 15,00",
-        preco: 15.00
-    },
-    {
-        volume:"1kg",
-        precoString:"R$ 20,00",
-        preco: 20.00
-    }]
-    
-    const saborCremes = [
-    {
-        sabor:"Creme de Ninho",
-        id:"ninho"
-    },
-    {
-        sabor:"Creme de Oreo",
-        id:"oreo"
-    },
-    {
-        sabor:"Creme de Morango",
-        id:"morango"
-    },
-    {
-        sabor:"Creme de Ovomaltine",
-        id:"ovomaltine"
-    },
-    {
-        sabor:"Creme de Nutella",
-        id:"nutella"
-    }]
-    
-    const saborAdicionais = [
-    {
-        sabor:"Leite em pó",
-        id:"lPo"
-    },
-    {
-        sabor:"Nutella",
-        id:"nut"
-    },
-    {
-        sabor:"Sucrilhos",
-        id:"sucri"
-    },
-    {
-        sabor:"Gotas de chocolate",
-        id:"gChoco"
-    },
-    {
-        sabor:"Paçoca",
-        id:"pacoca"
-    }]
-    
-    const saborAdicionaisPagos = [
-    {
-        sabor:"Leite em pó",
-        id:"lPoPAG",
-        precoString:"R$ 0,50",
-        preco:  0.50
-    },
-    {
-        sabor:"Nutella",
-        id:"nutPAG",
-        precoString:"R$ 1,00",
-        preco:  1.00
-    },
-    {
-        sabor:"Sucrilhos",
-        id:"sucriPAG",
-        precoString:"R$ 0,50",
-        preco:  0.50
-    },
-    {
-        sabor:"Gotas de chocolate",
-        id:"gChocoPAG",
-        precoString:"R$ 0,50",
-        preco:  0.50
-    },
-    {
-        sabor:"Paçoca",
-        id:"pacocaPAG",
-        precoString:"R$ 0,50",
-        preco:  0.50
-    }]
-    
-    const colCards = document.querySelector(".colCards")
-    const grupoCremes = document.querySelector(".grupoCremes")
-    const grupoAdicionais = document.querySelector(".grupoAdicionais")
-    const grupoAdicionaisPagos = document.querySelector(".grupoAdicionaisPagos")
-    
-    gerarModal1()
-    
-    const cards = document.querySelectorAll(".card")
-    const titulo1 = document.querySelector(".titulo1")
-    cards.forEach((e)=>{
-        e.addEventListener("click", ()=>{
-            //gerar modal 1
-            titulo1.innerHTML = `Açaí ${e.dataset.vol}`
-            volumeAcai = e.dataset.vol
-        })
+import {acais} from './modules.js'
+import {saborCremes} from './modules.js'
+import {saborAdicionais} from './modules.js'
+import {saborAdicionaisPagos} from './modules.js'
+import {bairros2} from './modules.js'
+
+const colCards = document.querySelector(".colCards")
+const grupoCremes = document.querySelector(".grupoCremes")
+const grupoAdicionais = document.querySelector(".grupoAdicionais")
+const grupoAdicionaisPagos = document.querySelector(".grupoAdicionaisPagos")
+const selectBairro = document.querySelector("#selectBairro")
+
+gerarSelect()
+gerarModal1()
+
+const cards = document.querySelectorAll(".card")
+const titulo1 = document.querySelector(".titulo1")
+cards.forEach((e)=>{
+    e.addEventListener("click", ()=>{
+        //gerar modal 1
+        titulo1.innerHTML = `Açaí ${e.dataset.vol}`
+        volumeAcai = e.dataset.vol
     })
+})
+
+selectBairro.addEventListener("click", (e)=>{
+    const index = selectBairro.selectedIndex
+    const textoSelected = selectBairro.options[index].text
+    let frete = document.querySelector(".frete")
+    let retorno = saberFreteString(textoSelected)
+
+    console.log(selectBairro.value)
+
+    if((selectBairro.value == "null")){
+        frete.innerHTML = ''
+    }else{
+
+        console.log(retorno)
+        frete.innerHTML = `Frete: ${retorno}`
+    }
+    
+    // console.log(textoSelected)
+    // console.log(e.target)
+    
+})
 
 //codigo antigo
 
@@ -127,7 +58,7 @@ let stringCremes = ''
 let stringAdicionais
 let stringAdicionaisPagos
 
-const precosAdi = {nutella:2.50, lCond:1.00, paco:1.00}
+// const precosAdi = {nutella:2.50, lCond:1.00, paco:1.00}
 let precoAdiPag = 0
 
 const proximo = document.querySelector(".prox")
@@ -138,7 +69,7 @@ proximo.addEventListener("click", (e) =>{
     aAdiPag = []
     cremes.forEach( (e) => {
         if(e.checked){
-            eId = e.id
+            let eId = e.id
     
             const label = document.querySelector(`[data-nome="${eId}"]`)
             aCremes.push(label.innerHTML)
@@ -149,7 +80,7 @@ proximo.addEventListener("click", (e) =>{
     
     adicionais.forEach((e)=>{
         if(e.checked){
-            eId = e.id
+            let eId = e.id
     
             const label = document.querySelector(`[data-nome="${eId}"]`)
             aAdi.push(label.innerHTML)
@@ -158,7 +89,7 @@ proximo.addEventListener("click", (e) =>{
 
     adicionaisPagos.forEach((e)=>{
         if(e.checked){
-            eId = e.id
+            let eId = e.id
     
             const label = document.querySelector(`[data-nome="${eId}"]`)
             aAdiPag.push(label.innerHTML)
@@ -264,10 +195,24 @@ function gerarModal1(){
     gerarOpcoesAdicionaisPagos()
 }
 
+function gerarSelect(){
+    bairros2.map((e)=>{
+        // console.log(e)
+        // console.log(selectBairro)
+        $(selectBairro).append(`<option value="${e.frete}">${e.bairro}</option>`);
+    })
+}
 
+function saberFreteString(nomeBairro){
+    let freteRetorno
+    bairros2.map((e)=>{
+        if(e.bairro == nomeBairro){
+            // console.log(e.bairro)
+            // console.log(nomeBairro)
+            // console.log(e.freteString)
+            freteRetorno = e.freteString
+        }
+    })
 
-
-
-
-
-
+    return freteRetorno
+}
