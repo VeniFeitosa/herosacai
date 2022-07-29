@@ -1,9 +1,127 @@
+const acais = [
+    {
+        volume:"300ml",
+        precoString:"R$ 10,00",
+        preco: 10.00
+    },
+    {
+        volume:"400ml",
+        precoString:"R$ 12,00",
+        preco: 12.00
+    },
+    {
+        volume:"600ml",
+        precoString:"R$ 15,00",
+        preco: 15.00
+    },
+    {
+        volume:"1kg",
+        precoString:"R$ 20,00",
+        preco: 20.00
+    }]
+    
+    const saborCremes = [
+    {
+        sabor:"Creme de Ninho",
+        id:"ninho"
+    },
+    {
+        sabor:"Creme de Oreo",
+        id:"oreo"
+    },
+    {
+        sabor:"Creme de Morango",
+        id:"morango"
+    },
+    {
+        sabor:"Creme de Ovomaltine",
+        id:"ovomaltine"
+    },
+    {
+        sabor:"Creme de Nutella",
+        id:"nutella"
+    }]
+    
+    const saborAdicionais = [
+    {
+        sabor:"Leite em pó",
+        id:"lPo"
+    },
+    {
+        sabor:"Nutella",
+        id:"nut"
+    },
+    {
+        sabor:"Sucrilhos",
+        id:"sucri"
+    },
+    {
+        sabor:"Gotas de chocolate",
+        id:"gChoco"
+    },
+    {
+        sabor:"Paçoca",
+        id:"pacoca"
+    }]
+    
+    const saborAdicionaisPagos = [
+    {
+        sabor:"Leite em pó",
+        id:"lPoPAG",
+        precoString:"R$ 0,50",
+        preco:  0.50
+    },
+    {
+        sabor:"Nutella",
+        id:"nutPAG",
+        precoString:"R$ 1,00",
+        preco:  1.00
+    },
+    {
+        sabor:"Sucrilhos",
+        id:"sucriPAG",
+        precoString:"R$ 0,50",
+        preco:  0.50
+    },
+    {
+        sabor:"Gotas de chocolate",
+        id:"gChocoPAG",
+        precoString:"R$ 0,50",
+        preco:  0.50
+    },
+    {
+        sabor:"Paçoca",
+        id:"pacocaPAG",
+        precoString:"R$ 0,50",
+        preco:  0.50
+    }]
+    
+    const colCards = document.querySelector(".colCards")
+    const grupoCremes = document.querySelector(".grupoCremes")
+    const grupoAdicionais = document.querySelector(".grupoAdicionais")
+    const grupoAdicionaisPagos = document.querySelector(".grupoAdicionaisPagos")
+    
+    gerarModal1()
+    
+    const cards = document.querySelectorAll(".card")
+    const titulo1 = document.querySelector(".titulo1")
+    cards.forEach((e)=>{
+        e.addEventListener("click", ()=>{
+            //gerar modal 1
+            titulo1.innerHTML = `Açaí ${e.dataset.vol}`
+            volumeAcai = e.dataset.vol
+        })
+    })
+
+//codigo antigo
+
 const cremes = document.querySelectorAll(".creme")
 const adicionais = document.querySelectorAll(".adi")
 const adicionaisPagos = document.querySelectorAll(".adiPag")
 let aCremes = []
 let aAdi = []
 let aAdiPag = []
+let volumeAcai = ''
 
 let stringCremes = ''
 let stringAdicionais
@@ -11,8 +129,6 @@ let stringAdicionaisPagos
 
 const precosAdi = {nutella:2.50, lCond:1.00, paco:1.00}
 let precoAdiPag = 0
-adicionarPrecos()
-
 
 const proximo = document.querySelector(".prox")
 proximo.addEventListener("click", (e) =>{
@@ -51,47 +167,32 @@ proximo.addEventListener("click", (e) =>{
     })
     
     // console.log(aCremes)
+    console.log(`Volume do açaí: ${volumeAcai}`)
     stringCremes = aCremes.join(', ')
-    console.log(stringCremes)
+    console.log(`Cremes escolhidos: ${stringCremes}`)
     
     stringAdicionais = aAdi.join(', ')
-    console.log(stringAdicionais)
+    console.log(`Adicionais escolhido: ${stringAdicionais}`)
 
     stringAdicionaisPagos = aAdiPag.join(', ')
-    console.log(stringAdicionaisPagos)
-
+    console.log(`Adicionais pagos: ${stringAdicionaisPagos}`)
+    // console.log(aAdiPag)
     somarAdicionais()
 })
 
 const finalizar = document.querySelector(".finalizar")
 finalizar.addEventListener("click", redirecionar)
 
-function adicionarPrecos(){
-    const pNutella = document.querySelector("[data-preco=nutella]");
-    const lCond = document.querySelector("[data-preco=lCond]");
-    const paco = document.querySelector("[data-preco=paco]");
-
-    pNutella.innerHTML = `R$${precosAdi.nutella}0`
-    lCond.innerHTML = `R$${precosAdi.lCond}.00`
-    paco.innerHTML = `R$${precosAdi.paco}.00`
-}
+//fazer nova função que some os adicionais
 
 function somarAdicionais(){
     precoAdiPag = 0
     aAdiPag.forEach((e)=>{
-        switch (e) {
-            case "Nutella":
-                precoAdiPag+= precosAdi.nutella
-                break;
-            case "Leite condensado":
-                precoAdiPag+= precosAdi.lCond
-                break;
-            case "Paçoca":
-                precoAdiPag+= precosAdi.paco
-                break;
-            default:
-                break;
-        }
+        saborAdicionaisPagos.map((element)=>{
+            if(element.sabor == e){
+                precoAdiPag += element.preco
+            }
+        })
     })
 
     console.log(`Preço total dos adicionais pagos: ${precoAdiPag}`)
@@ -99,7 +200,7 @@ function somarAdicionais(){
 
 function redirecionar(){
     const cTipo = encodeURI("Tradicional")
-    const cVolume = encodeURI("variavel")
+    const cVolume = encodeURI(volumeAcai)
     const cCreme = encodeURI(stringCremes)
     const cAdicionais = encodeURI(stringAdicionais)
     const cEndereco = encodeURI("variavel")
@@ -112,6 +213,59 @@ function redirecionar(){
 
     window.location.href = url
 }   
+
+function gerarCardsAcai(){
+    acais.map((e)=>{
+        $(colCards).append(`<div class="card mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
+    <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">Açaí ${e.volume}</h5>
+            <p class="card-text">${e.precoString}</p>
+        </div>
+    </div>
+    </div>`)
+    })
+}
+
+function gerarOpcoesCremes(){
+    saborCremes.map((e)=>{
+        $(grupoCremes).append(`<li class="list-group-item">
+        <input class="form-check-input me-1 creme" type="checkbox" value="" id="${e.id}">
+        <label class="form-check-label stretched-link" for="${e.id}" data-nome="${e.id}">${e.sabor}</label>
+      </li>`)
+    })
+}
+
+function gerarOpcoesAdicionais(){
+    saborAdicionais.map((e)=>{
+        $(grupoAdicionais).append(`<li class="list-group-item">
+        <input class="form-check-input me-1 adi" type="checkbox" value="" id="${e.id}">
+        <label class="form-check-label stretched-link" for="${e.id}" data-nome="${e.id}">${e.sabor}</label>
+      </li>`)
+    })
+}
+
+function gerarOpcoesAdicionaisPagos(){
+    saborAdicionaisPagos.map((e)=>{
+        $(grupoAdicionaisPagos).append(`<li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <input class="form-check-input me-1 adiPag" type="checkbox" value="" id="${e.id}">
+          <label class="form-check-label stretched-link" for="${e.id}" data-nome="${e.id}">${e.sabor}</label>
+        </div>
+        <span class="badge bg-primary rounded-pill" data-preco="variavel">${e.precoString}</span>
+      </li>`)
+    })
+}
+
+function gerarModal1(){
+    gerarCardsAcai()
+    gerarOpcoesCremes()
+    gerarOpcoesAdicionais()
+    gerarOpcoesAdicionaisPagos()
+}
+
+
+
 
 
 

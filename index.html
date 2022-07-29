@@ -9,23 +9,8 @@
 </head>
 <body>
     <div class="row">
-        <div class="col">
-            <div class="card mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Açaí 300ml</h5>
-                        <p class="card-text">Preço</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Açaí 400ml</h5>
-                        <p class="card-text">Preço</p>
-                    </div>
-                </div>
-            </div>
+        <div class="col colCards">
+          <!-- Cards -->
         </div>
     </div>
     <!-- Button trigger modal -->
@@ -34,68 +19,26 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title titulo1" id="exampleModalLabel">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           Cremes
           <hr>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <input class="form-check-input me-1 creme" type="checkbox" value="" id="firstCheckboxStretched">
-              <label class="form-check-label stretched-link" for="firstCheckboxStretched" data-nome="firstCheckboxStretched">Creme de ninho</label>
-            </li>
-            <li class="list-group-item">
-              <input class="form-check-input me-1 creme" type="checkbox" value="" id="secondCheckboxStretched">
-              <label class="form-check-label stretched-link" for="secondCheckboxStretched" data-nome="secondCheckboxStretched">Creme de ninho com nutella</label>
-            </li>
-            <li class="list-group-item">
-              <input class="form-check-input me-1 creme" type="checkbox" value="" id="thirdCheckboxStretched">
-              <label class="form-check-label stretched-link" for="thirdCheckboxStretched" data-nome="thirdCheckboxStretched">Creme de Oreo</label>
-            </li>
+          <ul class="list-group grupoCremes">
+            <!-- Lista de cremes -->
           </ul>
 
           Adicionais
           <hr>
-          <ul class="list-group">
-            <li class="list-group-item">
-              <input class="form-check-input me-1 adi" type="checkbox" value="" id="firstCheckboxStretched2">
-              <label class="form-check-label stretched-link" for="firstCheckboxStretched2" data-nome="firstCheckboxStretched2">Leite em pó</label>
-            </li>
-            <li class="list-group-item">
-              <input class="form-check-input me-1 adi" type="checkbox" value="" id="secondCheckboxStretched2">
-              <label class="form-check-label stretched-link" for="secondCheckboxStretched2" data-nome="secondCheckboxStretched2">Banana</label>
-            </li>
-            <li class="list-group-item">
-              <input class="form-check-input me-1 adi" type="checkbox" value="" id="thirdCheckboxStretched2">
-              <label class="form-check-label stretched-link" for="thirdCheckboxStretched2" data-nome="thirdCheckboxStretched2">Disquete</label>
-            </li>
+          <ul class="list-group grupoAdicionais">
+            <!-- Lista de adicionais -->
           </ul>
 
           Adicionais Pagos
           <hr>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <input class="form-check-input me-1 adiPag" type="checkbox" value="" id="firstCheckboxStretched3">
-                <label class="form-check-label stretched-link" for="firstCheckboxStretched3" data-nome="firstCheckboxStretched3">Nutella</label>
-              </div>
-              <span class="badge bg-primary rounded-pill" data-preco="nutella">preço</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <input class="form-check-input me-1 adiPag" type="checkbox" value="" id="secondCheckboxStretched3">
-                <label class="form-check-label stretched-link" for="secondCheckboxStretched3" data-nome="secondCheckboxStretched3">Leite condensado</label>
-              </div>
-              <span class="badge bg-primary rounded-pill" data-preco="lCond">preço</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div>
-                <input class="form-check-input me-1 adiPag" type="checkbox" value="" id="thirdCheckboxStretched3">
-                <label class="form-check-label stretched-link" for="thirdCheckboxStretched3" data-nome="thirdCheckboxStretched3">Paçoca</label>
-              </div>
-              <span class="badge bg-primary rounded-pill" data-preco="paco">preço</span>
-            </li>
+          <ul class="list-group grupoAdicionaisPagos">
+            <!-- Lista de adicionais pagos -->
           </ul>
         </div>
         <div class="modal-footer">
@@ -131,8 +74,8 @@
     </div>
   </div>
     
-    <script type="module" src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="module" src="./node_modules/jquery/dist/jquery.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.js"></script>
     <script src="./src/assets/js/main.js"></script>
 </body>
 </html>
