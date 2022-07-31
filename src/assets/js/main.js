@@ -3,6 +3,8 @@ import {saborCremes} from './modules.js'
 import {saborAdicionais} from './modules.js'
 import {saborAdicionaisPagos} from './modules.js'
 import {bairros2} from './modules.js'
+import $ from 'jquery'
+import index_umd from 'bootstrap'
 
 const colCards = document.querySelector(".colCards")
 const grupoCremes = document.querySelector(".grupoCremes")
@@ -41,7 +43,6 @@ selectBairro.addEventListener("click", (e)=>{
     
     // console.log(textoSelected)
     // console.log(e.target)
-    
 })
 
 //codigo antigo
@@ -111,10 +112,8 @@ proximo.addEventListener("click", (e) =>{
     somarAdicionais()
 })
 
-const finalizar = document.querySelector(".finalizar")
-finalizar.addEventListener("click", redirecionar)
-
-//fazer nova função que some os adicionais
+// const finalizar = document.querySelector(".finalizar")
+// finalizar.addEventListener("click", redirecionar)
 
 function somarAdicionais(){
     precoAdiPag = 0

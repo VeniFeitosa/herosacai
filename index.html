@@ -8,10 +8,15 @@
     <title>Hero's Açaí</title>
 </head>
 <body>
-    <div class="row">
-        <div class="col colCards">
-          <!-- Cards -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="cards" style="width: 540px;
+        margin: auto;">
+          <div class="col colCards">
+            <!-- Cards -->
+          </div>
         </div>
+    </div>
     </div>
     <!-- Button trigger modal -->
   <!-- Modal -->
@@ -72,14 +77,38 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
+          <button type="button" class="btn btn-primary" data-bs-target="#modal3" data-bs-toggle="modal">Próximo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Revisando pedido</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              ........
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#modal2" data-bs-toggle="modal">Voltar</button>
           <button type="button" class="btn btn-primary finalizar">Finalizar</button>
         </div>
       </div>
     </div>
   </div>
     
-    <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="./node_modules/jquery/dist/jquery.js"></script>
+    <!-- <script type="module" src="./node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+    <!-- <script type="module" src="./node_modules/jquery/dist/jquery.js"></script> -->
+    <!-- <script src="./src/assets/js/jquery.maskMoney.min.js"></script> -->
+    <script src="./src/assets/js/currency.min.js"></script>
     <script type="module" src="./src/assets/js/main.js"></script>
 </body>
 </html>
