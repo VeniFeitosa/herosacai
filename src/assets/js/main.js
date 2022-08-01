@@ -1,11 +1,6 @@
-import {acais} from './modules.js'
-import {saborCremes} from './modules.js'
-import {saborAdicionais} from './modules.js'
-import {saborAdicionaisPagos} from './modules.js'
-import {bairros2} from './modules.js'
+import {acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
 import $ from 'jquery'
 import index_umd from 'bootstrap'
-
 const colCards = document.querySelector(".colCards")
 const grupoCremes = document.querySelector(".grupoCremes")
 const grupoAdicionais = document.querySelector(".grupoAdicionais")

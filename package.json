@@ -1,11 +1,16 @@
 {
-  "name": "erick",
+  "name": "herosacai",
   "version": "1.0.0",
   "homepage": "https://venifeitosa.github.io/herosacai/",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"parcel index.html"
+    "start": "parcel ./src/index.html --no-cache",
+    "build:parcel": "parcel build ./src/index.html --no-cache --public-url /herosacai",
+    "clear:wind": "rd /s/q dist",
+    "build": "npm run clear:wind && npm run build:parcel",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
