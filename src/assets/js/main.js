@@ -1,44 +1,45 @@
 import {acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
 import $ from 'jquery'
 import index_umd from 'bootstrap'
+const BRL = value => currency(value, { symbol: 'R$ ', decimal: ',', separator: '.' });
+
 const colCards = document.querySelector(".colCards")
 const grupoCremes = document.querySelector(".grupoCremes")
 const grupoAdicionais = document.querySelector(".grupoAdicionais")
 const grupoAdicionaisPagos = document.querySelector(".grupoAdicionaisPagos")
 const selectBairro = document.querySelector("#selectBairro")
+const qtdPedidos = $('#qtdPedido')[0]
 
+let precoAdiPag = 0
+let precoFrete = 0
+let precoTotal = 0
+let volumeAcai
+
+gerarCardsAcai()
 gerarSelect()
 gerarModal1()
+quantidadePedidos()
+// $('.prox2').trigger('click')
+
 
 const cards = document.querySelectorAll(".card")
-const titulo1 = document.querySelector(".titulo1")
+const tituloModais = document.querySelectorAll(".tituloModais")
+
+//gera o título das modais e recebe o volume do acai selecionado
 cards.forEach((e)=>{
     e.addEventListener("click", ()=>{
         //gerar modal 1
-        titulo1.innerHTML = `Açaí ${e.dataset.vol}`
+        // gerarModal1()
+        tituloModais.forEach(element =>{
+            element.innerHTML = `Açaí ${e.dataset.vol}`
+        })
         volumeAcai = e.dataset.vol
+
+        console.log(`volumeacai no cards.foreach ${volumeAcai}`)
     })
 })
 
-selectBairro.addEventListener("click", (e)=>{
-    const index = selectBairro.selectedIndex
-    const textoSelected = selectBairro.options[index].text
-    let frete = document.querySelector(".frete")
-    let retorno = saberFreteString(textoSelected)
 
-    console.log(selectBairro.value)
-
-    if((selectBairro.value == "null")){
-        frete.innerHTML = ''
-    }else{
-
-        console.log(retorno)
-        frete.innerHTML = `Frete: ${retorno}`
-    }
-    
-    // console.log(textoSelected)
-    // console.log(e.target)
-})
 
 //codigo antigo
 
@@ -48,14 +49,13 @@ const adicionaisPagos = document.querySelectorAll(".adiPag")
 let aCremes = []
 let aAdi = []
 let aAdiPag = []
-let volumeAcai = ''
 
 let stringCremes = ''
 let stringAdicionais
 let stringAdicionaisPagos
 
 // const precosAdi = {nutella:2.50, lCond:1.00, paco:1.00}
-let precoAdiPag = 0
+
 
 const proximo = document.querySelector(".prox")
 proximo.addEventListener("click", (e) =>{
@@ -63,6 +63,7 @@ proximo.addEventListener("click", (e) =>{
     aCremes = []
     aAdi = []
     aAdiPag = []
+    precoAdiPag = 0
     cremes.forEach( (e) => {
         if(e.checked){
             let eId = e.id
@@ -88,7 +89,21 @@ proximo.addEventListener("click", (e) =>{
             let eId = e.id
     
             const label = document.querySelector(`[data-nome="${eId}"]`)
-            aAdiPag.push(label.innerHTML)
+
+            saborAdicionaisPagos.map((element)=>{
+                if(element.sabor == label.innerHTML && label.innerHTML != "Sem adicional pago"){
+                    aAdiPag.push(`${label.innerHTML} +${element.precoString}`)
+                    precoAdiPag += element.preco
+                    // console.log(label.innerHTML)
+                }
+            })
+
+            if (label.innerHTML == "Sem adicional pago") {
+                aAdiPag[0] = label.innerHTML
+                precoAdiPag = 0
+            }
+
+            // aAdiPag.push(label.innerHTML)
 
         }
     })
@@ -103,8 +118,31 @@ proximo.addEventListener("click", (e) =>{
 
     stringAdicionaisPagos = aAdiPag.join(', ')
     console.log(`Adicionais pagos: ${stringAdicionaisPagos}`)
-    // console.log(aAdiPag)
-    somarAdicionais()
+    console.log(precoAdiPag)
+    // somarAdicionais()
+})
+
+selectBairro.addEventListener("change", (e)=>{
+    const index = selectBairro.selectedIndex
+    const textoSelected = selectBairro.options[index].text
+    let frete = document.querySelector(".frete")
+    let retorno = saberFreteString(textoSelected)
+    precoFrete = BRL(retorno)
+
+    if((selectBairro.value == "null")){
+        frete.innerHTML = ''
+    }else{
+
+        console.log(retorno)
+        frete.innerHTML = `Frete: ${retorno}`
+        
+    }
+    
+})
+
+$('.prox2').click(()=>{
+    gerarTabelaResumo()
+    
 })
 
 // const finalizar = document.querySelector(".finalizar")
@@ -112,6 +150,7 @@ proximo.addEventListener("click", (e) =>{
 
 function somarAdicionais(){
     precoAdiPag = 0
+    console.log(`adipag no somarAdicionais: ${aAdiPag}`)
     aAdiPag.forEach((e)=>{
         saborAdicionaisPagos.map((element)=>{
             if(element.sabor == e){
@@ -183,7 +222,10 @@ function gerarOpcoesAdicionaisPagos(){
 }
 
 function gerarModal1(){
-    gerarCardsAcai()
+    // $(".grupoCremes")[0].innerHTML = ''
+    // $(".grupoAdicionais")[0].innerHTML = ''
+    // $(".grupoAdicionaisPagos")[0].innerHTML = ''
+
     gerarOpcoesCremes()
     gerarOpcoesAdicionais()
     gerarOpcoesAdicionaisPagos()
@@ -201,12 +243,89 @@ function saberFreteString(nomeBairro){
     let freteRetorno
     bairros2.map((e)=>{
         if(e.bairro == nomeBairro){
-            // console.log(e.bairro)
-            // console.log(nomeBairro)
-            // console.log(e.freteString)
             freteRetorno = e.freteString
         }
     })
 
     return freteRetorno
+}
+
+function quantidadePedidos(){
+    // qtdPedidos.value = 1
+    
+    $('.addPedido').click(e =>{
+        qtdPedidos.value++
+        // console.log(qtdPedidos.value)
+        let multiPreco = calcularPrecoTotal()
+        const precoResumo = $('.precoTotalResumo')[0]
+        precoResumo.innerHTML = `Preço total: <strong>${BRL(multiPreco).format()}</strong>`
+    })
+
+    $('.remPedido').click(e =>{
+        if(qtdPedidos.value <= 1){
+            qtdPedidos.value = 1
+        }else{
+            qtdPedidos.value--
+        }
+        // console.log(qtdPedidos.value)
+        let multiPreco = calcularPrecoTotal()
+        const precoResumo = $('.precoTotalResumo')[0]
+        precoResumo.innerHTML = `Preço total: <strong>${BRL(multiPreco).format()}</strong>`
+    })
+}
+
+function saberPrecoAcai(){
+    let preco
+    acais.map(e => {
+        if(e.volume == volumeAcai){
+            preco = e.preco
+        }
+    })
+
+    return preco
+}
+
+function calcularPrecoTotal(){
+    // console.log(qtdPedidos.value)
+    let precoAcai = saberPrecoAcai()
+    let soma
+    let multi = (precoAcai + precoAdiPag) * qtdPedidos.value
+    if(precoFrete.value != undefined){
+        soma = multi + precoFrete.value 
+    }else{
+        soma = multi
+    }
+          
+    // console.log(`soma no calcular: ${precoFrete + precoFrete}`)
+    return soma
+}
+
+function gerarAdiPagResumo(){
+    $('.adiPagResumo').html("")
+
+    aAdiPag.forEach(e =>{
+        $('.adiPagResumo').append(`<p>${e}</p>`)
+    })
+}
+
+function gerarTabelaResumo(){
+
+    const mlResumo = $('.mlResumo')[0]
+    const cremesResumo = $('.cremesResumo')[0]
+    const adiResumo = $('.adiResumo')[0]
+    const adiPagResumo = $('.adiPagResumo')[0]
+    const freteResumo = $('.freteResumo')[0]
+    const precoTotalResumo = $('.precoTotalResumo')[0]
+
+    let preco = calcularPrecoTotal()
+    let precoAcaiResumo = saberPrecoAcai()
+
+
+    mlResumo.innerHTML = `Açaí ${volumeAcai} <strong>${BRL(precoAcaiResumo).format()}</strong>`
+    cremesResumo.innerHTML = `${stringCremes}`
+    adiResumo.innerHTML = `${stringAdicionais}`
+    // adiPagResumo.innerHTML = `${stringAdicionaisPagos}`
+    gerarAdiPagResumo()
+    freteResumo.innerHTML = `Frete: <strong>${BRL(precoFrete).format()}</strong>` 
+    precoTotalResumo.innerHTML = `Preço total: <strong>${BRL(preco).format()}</strong>`
 }
