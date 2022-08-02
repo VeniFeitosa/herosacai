@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href=".././node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <title>Hero's Açaí</title>
+</head>
+<body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="cards" style="width: 540px;
+        margin: auto;">
+          <div class="col colCards">
+            <!-- Cards -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button trigger modal -->
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title tituloModais" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Cremes
+          <hr>
+          <ul class="list-group grupoCremes">
+            <!-- Lista de cremes -->
+          </ul>
+
+          Adicionais
+          <hr>
+          <ul class="list-group grupoAdicionais">
+            <!-- Lista de adicionais -->
+          </ul>
+
+          Adicionais Pagos
+          <hr>
+          <ul class="list-group grupoAdicionaisPagos">
+            <!-- Lista de adicionais pagos -->
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary prox" data-bs-target="#modal2" data-bs-toggle="modal">Próximo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title tituloModais" id="exampleModalLabel"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <label for="selectBairro" class="form-label">Selecione o bairro</label>
+                <select id="selectBairro" class="form-select" aria-label="Default select example">
+                  <option selected value="null"></option>
+                  <!-- <option value="">One</option> -->
+                </select>
+                <h6 class="frete"></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
+          <button type="button" class="btn btn-primary prox2" data-bs-target="#modal3" data-bs-toggle="modal">Próximo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Revisando pedido</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <!-- <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary remPedido"></button>
+                <input type="number" id="qtdPedido" value="1">
+                <button type="button" class="btn btn-primary addPedido"></button>
+              </div> -->
+              <div class="row justify-content-center">
+                <di class="col-6 d-flex justify-content-center">
+                  <button type="button" class="btn btn-primary remPedido"></button>
+                  <input type="number" id="qtdPedido" value="1">
+                  <button type="button" class="btn btn-primary addPedido"></button>
+                </di>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="2" class="text-center">Resumo do pedido</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider align-middle">
+                  <tr>
+                    <td class="mlResumo"></td>
+                  </tr>
+                  <tr>
+                    <td class="cremesResumo"></td>
+                  </tr>
+                  <tr>
+                    <td class="adiResumo"></td>
+                  </tr>
+                  <tr>
+                    <td class="adiPagResumo"></td>
+                  </tr>
+                </tbody>
+                <tfoot class="table-group-divider">
+                  <tr>
+                    <td class="freteResumo">Frete: 000</td>
+                  </tr>
+                  <tr>
+                    <td class="precoTotalResumo">Preço Total: 000</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#modal2" data-bs-toggle="modal">Voltar</button>
+          <button type="button" class="btn btn-primary finalizar">Finalizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+    <!-- <script type="module" src="./node_modules/bootstrap/dist/js/bootstrap.js"></script> -->
+    <!-- <script type="module" src="./node_modules/jquery/dist/jquery.js"></script> -->
+    <!-- <script src="./src/assets/js/jquery.maskMoney.min.js"></script> -->
+    <script src="./assets/js/currency.min.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
+</body>
+</html>
