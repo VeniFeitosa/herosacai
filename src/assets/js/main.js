@@ -20,7 +20,7 @@ gerarSelect()
 gerarModal1()
 quantidadePedidos()
 // $('.prox2').trigger('click')
-$('.finalizar').trigger('click')
+// $('.finalizar').trigger('click')
 $('.troco').hide()
 
 const cards = document.querySelectorAll(".card")
