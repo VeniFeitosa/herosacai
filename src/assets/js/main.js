@@ -20,7 +20,8 @@ gerarSelect()
 gerarModal1()
 quantidadePedidos()
 // $('.prox2').trigger('click')
-
+$('.finalizar').trigger('click')
+$('.troco').hide()
 
 const cards = document.querySelectorAll(".card")
 const tituloModais = document.querySelectorAll(".tituloModais")
@@ -35,7 +36,6 @@ cards.forEach((e)=>{
         })
         volumeAcai = e.dataset.vol
 
-        console.log(`volumeacai no cards.foreach ${volumeAcai}`)
     })
 })
 
@@ -49,6 +49,16 @@ const adicionaisPagos = document.querySelectorAll(".adiPag")
 let aCremes = []
 let aAdi = []
 let aAdiPag = []
+let carrinho = []
+let somacarrinho = 0
+let pedidoCompleto = [
+    "Bairro",
+    "Endereço", 
+    "Nome Cliente", 
+    "Numero", 
+    "Forma de pagamento", 
+    "Preço Total"
+]
 
 let stringCremes = ''
 let stringAdicionais
@@ -109,16 +119,11 @@ proximo.addEventListener("click", (e) =>{
     })
     
     // console.log(aCremes)
-    console.log(`Volume do açaí: ${volumeAcai}`)
     stringCremes = aCremes.join(', ')
-    console.log(`Cremes escolhidos: ${stringCremes}`)
     
     stringAdicionais = aAdi.join(', ')
-    console.log(`Adicionais escolhido: ${stringAdicionais}`)
 
-    stringAdicionaisPagos = aAdiPag.join(', ')
-    console.log(`Adicionais pagos: ${stringAdicionaisPagos}`)
-    console.log(precoAdiPag)
+    stringAdicionaisPagos = aAdiPag.join('; ')
     // somarAdicionais()
 })
 
@@ -128,25 +133,59 @@ selectBairro.addEventListener("change", (e)=>{
     let frete = document.querySelector(".frete")
     let retorno = saberFreteString(textoSelected)
     precoFrete = BRL(retorno)
+    
 
     if((selectBairro.value == "null")){
         frete.innerHTML = ''
+        $('.freteCarrinho').html(`Frete: Escolha o bairro`)
     }else{
 
-        console.log(retorno)
         frete.innerHTML = `Frete: ${retorno}`
-        
+        $('.freteCarrinho').html(`Frete: ${retorno}`)
+
+        let soma = somacarrinho + precoFrete.value
+
+        pedidoCompleto[0] = textoSelected
+        $('.totalCarrinho').html(`Preço Total: ${BRL(soma).format()}`)
     }
     
 })
 
-$('.prox2').click(()=>{
+// $('.prox2').click(()=>{
+//     gerarTabelaResumo()
+    
+// })
+
+$('.finalizar').click(() =>{
+    gerarTabelaCarrinho()
+    calcularPrecoCarrinho()
+})
+
+$('.prox').click(()=>{
     gerarTabelaResumo()
     
 })
 
-// const finalizar = document.querySelector(".finalizar")
-// finalizar.addEventListener("click", redirecionar)
+$('.adicionarCarrinho').click(() =>{
+    adicionar()
+})
+
+$('.verCompleto').click(() =>{
+    pedidoCompleto[6] = carrinho
+    // pedidoCompleto.push(carrinho)
+    console.log(pedidoCompleto)
+})
+
+$('.radios').click((e) =>{
+    if(e.target.id == "Dinheiro"){
+        $('.troco').show()
+    }else{
+        $('.troco').hide()
+    }
+
+    pedidoCompleto[4] = e.target.id
+    console.log(e.target.id)
+})
 
 function somarAdicionais(){
     precoAdiPag = 0
@@ -300,6 +339,18 @@ function calcularPrecoTotal(){
     return soma
 }
 
+function calcularPrecoCarrinho(){
+    somacarrinho = 0
+    carrinho.forEach(e =>{
+        // console.log(BRL(e.precoPedido).value)
+        somacarrinho += BRL(e.precoPedido).value
+    })
+    console.log(somacarrinho)
+
+    $('.subtotal').html(`Subtotal: ${BRL(somacarrinho).format()}`)
+    $('.totalCarrinho').html(`Preço Total: ${BRL(somacarrinho).format()}`)
+}
+
 function gerarAdiPagResumo(){
     $('.adiPagResumo').html("")
 
@@ -326,6 +377,75 @@ function gerarTabelaResumo(){
     adiResumo.innerHTML = `${stringAdicionais}`
     // adiPagResumo.innerHTML = `${stringAdicionaisPagos}`
     gerarAdiPagResumo()
-    freteResumo.innerHTML = `Frete: <strong>${BRL(precoFrete).format()}</strong>` 
+    // freteResumo.innerHTML = `Frete: <strong>${BRL(precoFrete).format()}</strong>` 
     precoTotalResumo.innerHTML = `Preço total: <strong>${BRL(preco).format()}</strong>`
+}
+
+function adicionar(){
+    let preco = calcularPrecoTotal()
+    let precoAcaiResumo = saberPrecoAcai()
+    const pedido = {
+        qtd: `${qtdPedidos.value}`,
+        volume: `Açaí ${volumeAcai} - ${BRL(precoAcaiResumo).format()}`,
+        cremes: `${stringCremes}`,
+        adicionais: `${stringAdicionais}`,
+        adicionaisPagos: `${stringAdicionaisPagos}`,
+        precoPedido: `${BRL(preco).format()}`
+    }
+
+    carrinho.push(pedido)
+    console.log(carrinho)
+
+    // console.log(`Adicionar no carrinho: ${qtdPedidos.value}`)
+    // console.log(`Adicionar no carrinho: ${volumeAcai} - ${BRL(precoAcaiResumo).format()}`)
+    // console.log(`Adicionar no carrinho: ${stringCremes}`)
+    // console.log(`Adicionar no carrinho: ${stringAdicionais}`)
+    // console.log(`Adicionar no carrinho: ${stringAdicionaisPagos}`)
+    // console.log(`Adicionar no carrinho: ${BRL(preco).format()}`)
+}
+
+function finalizar(){
+
+}
+
+function gerarTabelaCarrinho(){
+    $('.corpoItens').html('')
+    carrinho.forEach((e, index) =>{
+        // console.log(e.volume)
+        const adiArray = e.adicionais.split(", ")
+        const cremesArray = e.cremes.split(", ")
+        const adiPagArray = e.adicionaisPagos.split("; ")
+        console.log(adiArray)
+        console.log(adiPagArray)
+
+        $('.corpoItens').append(`
+        <div class="row ${index}">
+            <div class="col-md-12 itemTitle">
+                (${e.qtd}x) ${e.volume}
+            </div>
+        </div>`)
+
+        cremesArray.forEach((element =>{
+            $(`.${index}`).append(`
+            <div class="col-md-12 item">
+                ${element}
+            </div>`)
+        }))
+
+        adiArray.forEach((element =>{
+            $(`.${index}`).append(`
+            <div class="col-md-12 item">
+                ${element}
+            </div>`)
+        }))
+
+        adiPagArray.forEach((element =>{
+            $(`.${index}`).append(`
+            <div class="col-md-12 item">
+                ${element}
+            </div>`)
+        }))
+
+        
+    })
 }

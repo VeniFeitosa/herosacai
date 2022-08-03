@@ -18,7 +18,25 @@
           </div>
         </div>
       </div>
+      <button class="btn btn-primary verCompleto">Ver pedidoCompleto</button>
     </div>
+    <div class="cart-bottom hidden-md-up">
+      <div class="container fixed-bottom carrinhoContainer">
+        <div class="row justify-content-center">
+          <div class="col-6 d-flex justify-content-center">
+            X itens no carrinho
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-6 d-flex justify-content-center">
+            <button class="btn btn-primary finalizar" data-bs-target="#modal2" data-bs-toggle="modal">
+              Finalizar pedido
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- Button trigger modal -->
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -49,40 +67,12 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary prox" data-bs-target="#modal2" data-bs-toggle="modal">Próximo</button>
+          <button type="button" class="btn btn-primary prox" data-bs-target="#modal3" data-bs-toggle="modal">Próximo</button>
         </div>
       </div>
     </div>
   </div>
   
-  <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title tituloModais" id="exampleModalLabel"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col">
-              <div class="mb-3">
-                <label for="selectBairro" class="form-label">Selecione o bairro</label>
-                <select id="selectBairro" class="form-select" aria-label="Default select example">
-                  <option selected value="null"></option>
-                  <!-- <option value="">One</option> -->
-                </select>
-                <h6 class="frete"></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
-          <button type="button" class="btn btn-primary prox2" data-bs-target="#modal3" data-bs-toggle="modal">Próximo</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="modal fade" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -94,11 +84,6 @@
         <div class="modal-body">
           <div class="row">
             <div class="col">
-              <!-- <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-primary remPedido"></button>
-                <input type="number" id="qtdPedido" value="1">
-                <button type="button" class="btn btn-primary addPedido"></button>
-              </div> -->
               <div class="row justify-content-center">
                 <di class="col-6 d-flex justify-content-center">
                   <button type="button" class="btn btn-primary remPedido"></button>
@@ -128,9 +113,6 @@
                 </tbody>
                 <tfoot class="table-group-divider">
                   <tr>
-                    <td class="freteResumo">Frete: 000</td>
-                  </tr>
-                  <tr>
                     <td class="precoTotalResumo">Preço Total: 000</td>
                   </tr>
                 </tfoot>
@@ -139,8 +121,135 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-target="#modal2" data-bs-toggle="modal">Voltar</button>
-          <button type="button" class="btn btn-primary finalizar">Finalizar</button>
+          <button type="button" class="btn btn-secondary" data-bs-target="#exampleModal" data-bs-toggle="modal">Voltar</button>
+          <button type="button" class="btn btn-primary adicionarCarrinho" data-bs-dismiss="modal">Adicionar ao carrinho</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span><img src="./assets/img/cart-check.svg" alt="" width="36" height="36"></span>
+          <span class="modal-title" id="exampleModalLabel" style="font-size: 26px; padding-left: 7px">
+            Carrinho
+          </span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body corpoItens">
+                    <div class="row">
+                      <div class="col-md-12 itemTitle">
+                        Açaí 300ml
+                      </div>
+                      <div class="col-md-12 item">
+                        .....
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered">
+                  <!-- <thead>
+                    <tr>
+                      <th scope="col" colspan="2" class="text-center">Resumo do pedido</th>
+                    </tr>
+                  </thead> -->
+                  <tbody class="table-group-divider align-middle">
+                    <tr>
+                      <td class="subtotal">Subtotal: </td>
+                    </tr>
+                    <tr>
+                      <td class="freteCarrinho">Frete: Escolha o bairro</td>
+                    </tr>
+                    <tr>
+                      <td class="totalCarrinho">Preço Total: </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-12">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="selectBairro" class="form-label">Selecione o bairro</label>
+                  <select id="selectBairro" class="form-select" aria-label="Default select example">
+                    <option selected value="null"></option>
+                  </select>
+                  <h6 class="frete"></h6>
+                </div>
+
+                <div class="form-group">
+                  <label for="endereco" class="form-label">Endereço</label>
+                  <input type="text" class="form-control" id="endereco">
+                </div>
+
+                <div class="form-group">
+                  <label for="numero" class="form-label">Número</label>
+                  <input type="text" class="form-control" id="numero">
+                </div>
+
+                <div class="form-group">
+                  <label for="numero" class="form-label">Complemento/Ponto de referência</label>
+                  <input type="text" class="form-control" id="numero">
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-md-12">
+                <label class="form-label">Forma de pagamento</label>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Dinheiro" value="dinheiro">
+                    <label class="form-check-label" for="dinheiro">
+                      Dinheiro
+                    </label>
+                  </div>
+                  <div class="form-group troco" style="padding-left: 24px;">
+                    <label for="troco" class="form-label">Troco para quanto?</label>
+                    <input type="text" class="form-control" id="troco" placeholder="Se não precisar, deixe em branco">
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Pix" value="pix">
+                    <label class="form-check-label" for="pix">
+                      Pix
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Credito" value="credito">
+                    <label class="form-check-label" for="credito">
+                      Cartão de Crédito - Na máquina
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Debito" value="debito">
+                    <label class="form-check-label" for="debito">
+                      Cartão de Débito - Na máquina
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary">Enviar pedido</button>
         </div>
       </div>
     </div>

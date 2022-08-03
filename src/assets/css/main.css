@@ -31,3 +31,18 @@ td{
 .remPedido:hover, .addPedido:hover{
     box-shadow: none;
 }
+
+.carrinhoContainer{
+    background-color: rgb(177, 251, 167);
+}
+
+.item{
+    font-size: 12px;
+    color: #81868b;
+}
+
+@media (min-width: 768px){
+    .hidden-md-up {
+        display: none!important;
+    }
+}
