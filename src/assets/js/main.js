@@ -29,8 +29,8 @@ const tituloModais = document.querySelectorAll(".tituloModais")
 //gera o título das modais e recebe o volume do acai selecionado
 cards.forEach((e)=>{
     e.addEventListener("click", ()=>{
-        //gerar modal 1
-        // gerarModal1()
+        qtdPedidos.value = 1
+        removerChecked()
         tituloModais.forEach(element =>{
             element.innerHTML = `Açaí ${e.dataset.vol}`
         })
@@ -157,6 +157,9 @@ selectBairro.addEventListener("change", (e)=>{
 // })
 
 $('.finalizar').click(() =>{
+    selectBairro.options[0].selected = true
+    $('.frete').html(``)
+    $('.freteCarrinho').html(`Frete: Escolha o bairro`)
     gerarTabelaCarrinho()
     calcularPrecoCarrinho()
 })
@@ -171,6 +174,9 @@ $('.adicionarCarrinho').click(() =>{
 })
 
 $('.verCompleto').click(() =>{
+
+    removerChecked()
+
     pedidoCompleto[6] = carrinho
     // pedidoCompleto.push(carrinho)
     console.log(pedidoCompleto)
@@ -181,10 +187,16 @@ $('.radios').click((e) =>{
         $('.troco').show()
     }else{
         $('.troco').hide()
+        pedidoCompleto[4] = e.target.id
     }
 
-    pedidoCompleto[4] = e.target.id
-    console.log(e.target.id)
+    
+
+    // console.log(e.target.id)
+})
+
+$('.enviar').click(() =>{
+    enviar()
 })
 
 function somarAdicionais(){
@@ -291,6 +303,16 @@ function saberFreteString(nomeBairro){
 
 function quantidadePedidos(){
     // qtdPedidos.value = 1
+
+    qtdPedidos.addEventListener("change", () =>{
+        if(qtdPedidos.value <= 1){
+            qtdPedidos.value = 1
+        }
+        let multiPreco = calcularPrecoTotal()
+        const precoResumo = $('.precoTotalResumo')[0]
+        precoResumo.innerHTML = `Preço total: <strong>${BRL(multiPreco).format()}</strong>`
+        
+    })
     
     $('.addPedido').click(e =>{
         qtdPedidos.value++
@@ -327,13 +349,13 @@ function saberPrecoAcai(){
 function calcularPrecoTotal(){
     // console.log(qtdPedidos.value)
     let precoAcai = saberPrecoAcai()
-    let soma
-    let multi = (precoAcai + precoAdiPag) * qtdPedidos.value
-    if(precoFrete.value != undefined){
-        soma = multi + precoFrete.value 
-    }else{
-        soma = multi
-    }
+    let soma = (precoAcai + precoAdiPag) * qtdPedidos.value
+    // let multi = (precoAcai + precoAdiPag) * qtdPedidos.value
+    // if(precoFrete.value != undefined){
+    //     soma = multi + precoFrete.value 
+    // }else{
+    //     soma = multi
+    // }
           
     // console.log(`soma no calcular: ${precoFrete + precoFrete}`)
     return soma
@@ -404,8 +426,74 @@ function adicionar(){
     // console.log(`Adicionar no carrinho: ${BRL(preco).format()}`)
 }
 
-function finalizar(){
+function formaDePagamento(){
+    const radios = document.querySelectorAll(".radios")
+    const troco = $('#troco')[0].value
+    let pagamento
+    radios.forEach(e =>{
+        if(e.checked){
+            pagamento = e.value
+            // console.log(e.value)
+        }
+    })
 
+    if(pagamento == 'dinheiro'){
+        if(troco == ''){
+            pedidoCompleto[4] = "Dinheiro; Sem troco"
+        }else{
+            pedidoCompleto[4] = `Dinheiro; troco para ${BRL(troco).format()}`
+        }
+    }
+
+    switch (pagamento) {
+        case "pix":
+            pedidoCompleto[4] = "Pix"
+            break;
+
+        case "credito":
+            pedidoCompleto[4] = "Cartão de Crédito - Na máquina"
+            break;
+        
+        case "debito":
+            pedidoCompleto[4] = "Cartão de Débito - Na máquina"
+            break;
+        
+        default:
+            break;
+    }
+}
+
+function enviar(){
+    const nome = $('#nome')[0].value
+    const endereco = $('#endereco')[0].value
+    const numero = $('#numero')[0].value
+    const complemento = $('#complemento')[0].value
+    
+    const index = selectBairro.selectedIndex
+    const bairro = selectBairro.options[index].text
+
+    formaDePagamento()
+
+    let totalPedido = somacarrinho + precoFrete.value
+
+    pedidoCompleto[0] = bairro
+    pedidoCompleto[1] = endereco
+    pedidoCompleto[2] = nome
+    pedidoCompleto[3] = numero
+    pedidoCompleto[5] = BRL(totalPedido).format()
+
+}
+
+function removerChecked(){
+    $('.troco').hide()
+    const checks = document.querySelectorAll(".form-check-input")
+
+    checks.forEach(e =>{
+        if(e.checked){
+            e.checked = false
+            
+        }
+    })
 }
 
 function gerarTabelaCarrinho(){
