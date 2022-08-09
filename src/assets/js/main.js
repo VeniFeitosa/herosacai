@@ -1,6 +1,8 @@
 import {acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
 import $ from 'jquery'
 import index_umd from 'bootstrap'
+import teste from '../img/trash3.svg'
+// console.log(teste)
 const BRL = value => currency(value, { symbol: 'R$ ', decimal: ',', separator: '.' });
 
 const colCards = document.querySelector(".colCards")
@@ -14,6 +16,7 @@ let precoAdiPag = 0
 let precoFrete = 0
 let precoTotal = 0
 let qtdAdi = 0
+let qtdCremes = 0
 let limite = 0
 let limiteCremes = 0
 let volumeAcai
@@ -59,6 +62,7 @@ cards.forEach((e)=>{
 const cremes = document.querySelectorAll(".creme")
 const adicionais = document.querySelectorAll(".adi")
 const adicionaisPagos = document.querySelectorAll(".adiPag")
+
 let aCremes = []
 let aAdi = []
 let aAdiPag = []
@@ -198,16 +202,46 @@ cremes.forEach(e =>{
         if(qtdCremes > limiteCremes){
             e.checked = false
         }
-        console.log(qtdCremes)
     })
 })
+
+
+function excluirDoCarrinho(){
+    const excluir = document.querySelectorAll(".excluir")
+    excluir.forEach(e =>{
+        e.addEventListener("click", element =>{
+            const exIndex = parseInt(element.target.dataset.index)
+            carrinho.splice(exIndex, 1)
+            
+            const row = $(`.${exIndex}`)
+            row.hide()
+
+            console.log(carrinho.length)
+            if(carrinho.length == 0){
+                $('.finalizar').hide()
+                $('.msgCarrinho').show()
+            }
+            calcularPrecoCarrinho()
+            gerarBadgeCarrinho()
+        })
+    })
+    // carrinho.splice(index, 1)
+    // gerarTabelaCarrinho()
+    // calcularPrecoCarrinho()
+}
+
 
 $('.finalizar').click(() =>{
     selectBairro.options[0].selected = true
     $('.frete').html(``)
     $('.freteCarrinho').html(`Frete: Escolha o bairro`)
+
+    
     gerarTabelaCarrinho()
+    excluirDoCarrinho()
     calcularPrecoCarrinho()
+    
+    
 })
 
 $('.prox').click(()=>{
@@ -217,6 +251,8 @@ $('.prox').click(()=>{
 
 $('.adicionarCarrinho').click(() =>{
     adicionar()
+    $('.msgCarrinho').hide()
+    $('.finalizar').show()
     gerarBadgeCarrinho()
 })
 
@@ -245,6 +281,7 @@ $('.radios').click((e) =>{
 $('.enviar').click(() =>{
     enviar()
 })
+
 
 function somarAdicionais(){
     precoAdiPag = 0
@@ -283,7 +320,7 @@ function redirecionar(){
 
 function gerarCardsAcai(){
     acais.map((e)=>{
-        $(colCards).append(`<div class="card mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
+        $(colCards).append(`<div class="card cardAcai mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
         <div class="row g-0">
             <div class="col-sm-8">
                 <div class="card-body">
@@ -471,13 +508,6 @@ function adicionar(){
 
     carrinho.push(pedido)
     console.log(carrinho)
-
-    // console.log(`Adicionar no carrinho: ${qtdPedidos.value}`)
-    // console.log(`Adicionar no carrinho: ${volumeAcai} - ${BRL(precoAcaiResumo).format()}`)
-    // console.log(`Adicionar no carrinho: ${stringCremes}`)
-    // console.log(`Adicionar no carrinho: ${stringAdicionais}`)
-    // console.log(`Adicionar no carrinho: ${stringAdicionaisPagos}`)
-    // console.log(`Adicionar no carrinho: ${BRL(preco).format()}`)
 }
 
 function formaDePagamento(){
@@ -560,13 +590,17 @@ function gerarTabelaCarrinho(){
         const adiArray = e.adicionais.split(", ")
         const cremesArray = e.cremes.split(", ")
         const adiPagArray = e.adicionaisPagos.split("; ")
-        console.log(adiArray)
-        console.log(adiPagArray)
+        // console.log(adiArray)
+        // console.log(adiPagArray)
 
         $('.corpoItens').append(`
+        <div class="msgCarrinho" style="display: none;">
+            <p class="fw-bold">Sem itens no carrinho</p>
+        </div>
         <div class="row ${index}">
-            <div class="col-md-12 itemTitle">
-                (${e.qtd}x) ${e.volume}
+            <div class="col-md-12 itemTitle d-flex align-items-center justify-content-between">
+                <span>(${e.qtd}x) ${e.volume}</span>
+                <img class="excluir" data-index="${index}" src="${teste}" width="24"></img>
             </div>
         </div>`)
 
@@ -591,8 +625,8 @@ function gerarTabelaCarrinho(){
             </div>`)
         }))
 
-        
     })
+        
 }
 
 function itensCarrinhoURL(){
@@ -614,9 +648,15 @@ function itensCarrinhoURL(){
 }
 
 function gerarBadgeCarrinho(){
-    $('.finalizar').show()
+
+    // $('.finalizar').show()
     $('.qtdCarrinho')[0].innerHTML = carrinho.length
 }
 
-
+// function controlarCarrinho(){
+//     console.log(carrinho.length)
+//     $('.finalizar').show()
+   
+    
+// }
 

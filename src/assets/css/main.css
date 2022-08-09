@@ -46,9 +46,11 @@ td{
     align-items: center;
 }
 
-.card:hover{
+.cardAcai:hover, .excluir:hover{
     cursor: pointer;
 }
+
+
 @media (min-width: 768px){
     .hidden-md-up {
         display: none!important;
