@@ -9,6 +9,19 @@
     <title>Hero's Açaí</title>
 </head>
 <body>
+  <nav class="navbar bg-light sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="./assets/img/logo.png" alt="" width="80" height="80">
+      </a>
+      <button class="btn btn-primary finalizar" data-bs-target="#modal2" data-bs-toggle="modal">
+        <span><img src="./assets/img/cart.svg" alt="" width="28" height="28">
+          <span class="badge text-bg-warning qtdCarrinho"></span>
+        </span>
+        <span style="padding-left: 4px;">Finalizar pedido</span>
+      </button>
+    </div>
+  </nav>
     <div class="container-fluid">
       <div class="row">
         <div class="cards" style="width: 540px;
@@ -19,23 +32,26 @@
         </div>
       </div>
       <button class="btn btn-primary verCompleto">Ver pedidoCompleto</button>
-    </div>
-    <div class="cart-bottom hidden-md-up">
-      <div class="container fixed-bottom carrinhoContainer">
-        <div class="row justify-content-center">
-          <div class="col-6 d-flex justify-content-center">
-            X itens no carrinho
+
+      <!-- <div class="cart-bottom hidden-md-up">
+        <div class="container  carrinhoContainer">
+          <div class="row justify-content-center">
+            <div class="col-6 d-flex justify-content-center">
+              X itens no carrinho
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-6 d-flex justify-content-center">
+              <button class="btn btn-primary finalizar" data-bs-target="#modal2" data-bs-toggle="modal">
+                Finalizar pedido
+              </button>
+            </div>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-6 d-flex justify-content-center">
-            <button class="btn btn-primary finalizar" data-bs-target="#modal2" data-bs-toggle="modal">
-              Finalizar pedido
-            </button>
-          </div>
-        </div>
-      </div>
+      </div> -->
+      
     </div>
+    
     
     <!-- Button trigger modal -->
   <!-- Modal -->
@@ -43,7 +59,11 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title tituloModais" id="exampleModalLabel"></h5>
+          <div>
+            <h5 class="modal-title tituloModais" id="exampleModalLabel"></h5>
+            <h6 class="text-muted descCremes">coisas do acai</h6>
+            <h6 class="text-muted descAdi">coisas do acai</h6>
+          </div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

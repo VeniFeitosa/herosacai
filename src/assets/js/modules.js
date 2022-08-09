@@ -2,22 +2,44 @@ export const acais = [
 {
     volume:"300ml",
     precoString:"R$ 10,00",
-    preco: 10.00
+    preco: 10.00,
+    limite: 4,
+    limiteCremes: 1
 },
 {
     volume:"400ml",
-    precoString:"R$ 12,00",
-    preco: 12.00
+    precoString:"R$ 13,00",
+    preco: 13.00,
+    limite: 4,
+    limiteCremes: 1
+},
+{
+    volume:"500ml",
+    precoString:"R$ 15,00",
+    preco: 15.00,
+    limite: 5,
+    limiteCremes: 1
 },
 {
     volume:"600ml",
-    precoString:"R$ 15,00",
-    preco: 15.00
+    precoString:"R$ 18,00",
+    preco: 18.00,
+    limite: 5,
+    limiteCremes: 2
+},
+{
+    volume:"800ml",
+    precoString:"R$ 24,00",
+    preco: 24.00,
+    limite: 7,
+    limiteCremes: 2
 },
 {
     volume:"1kg",
-    precoString:"R$ 20,00",
-    preco: 20.00
+    precoString:"R$ 30,00",
+    preco: 30.00,
+    limite: 8,
+    limiteCremes: 2
 }]
 
 export const saborCremes = [
@@ -44,9 +66,21 @@ export const saborCremes = [
 {
     sabor:"Creme de Nutella",
     id:"nutella"
+},
+{
+    sabor:"Creme Iogurte Grego com Morango",
+    id:"gregoMorango"
+},
+{
+    sabor:"Creme de Romeu e Julieta",
+    id:"romeuJulieta"
 }]
 
 export const saborAdicionais = [
+{
+    sabor:"Sem adicionais",
+    id:"semAdi"
+},
 {
     sabor:"Leite em pó",
     id:"lPo"
@@ -64,8 +98,104 @@ export const saborAdicionais = [
     id:"gChoco"
 },
 {
-    sabor:"Paçoca",
-    id:"pacoca"
+    sabor:"Paçoquinha",
+    id:"pacoquinha"
+},
+{
+    sabor:"Amendoim",
+    id:"amendoim"
+},
+{
+    sabor:"Banana",
+    id:"banana"
+},
+{
+    sabor:"Bis",
+    id:"bis"
+},
+{
+    sabor:"Castanha Triturada",
+    id:"castanha"
+},
+{
+    sabor:"Cereja",
+    id:"cereja"
+},
+{
+    sabor:"Chocoboll",
+    id:"chocoboll"
+},
+{
+    sabor:"Cobertura de Açaí",
+    id:"coberAcai"
+},
+{
+    sabor:"Cobertura de Caramelo",
+    id:"coberCaramelo"
+},
+{
+    sabor:"Cobertura de Chocolate",
+    id:"coberChoco"
+},
+{
+    sabor:"Cobertura de Kiwi",
+    id:"coberKiwi"
+},
+{
+    sabor:"Cobertura de Limão",
+    id:"coberLimao"
+},
+{
+    sabor:"Cobertura de Morango",
+    id:"coberMorango"
+},
+{
+    sabor:"Cobertura de Uva",
+    id:"coberUva"
+},
+{
+    sabor:"Morango",
+    id:"morango"
+},
+{
+    sabor:"Ovomaltine",
+    id:"ovomaltine"
+},
+{
+    sabor:"Disquete",
+    id:"disquete"
+},
+{
+    sabor:"Farinha Láctea",
+    id:"farLac"
+},
+{
+    sabor:"Farofa de Amendoim",
+    id:"farAmem"
+},
+{
+    sabor:"Granola",
+    id:"granola"
+},
+{
+    sabor:"Granulado",
+    id:"granulado"
+},
+{
+    sabor:"Jujuba",
+    id:"jujuba"
+},
+{
+    sabor:"Kiwi",
+    id:"kiwi"
+},
+{
+    sabor:"Leite Condensado",
+    id:"leiCond"
+},
+{
+    sabor:"Tubetes",
+    id:"tubetes"
 }]
 
 export const saborAdicionaisPagos = [

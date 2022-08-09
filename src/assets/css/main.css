@@ -41,6 +41,14 @@ td{
     color: #81868b;
 }
 
+.finalizar{
+    display: flex;
+    align-items: center;
+}
+
+.card:hover{
+    cursor: pointer;
+}
 @media (min-width: 768px){
     .hidden-md-up {
         display: none!important;

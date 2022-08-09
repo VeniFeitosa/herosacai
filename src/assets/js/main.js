@@ -13,6 +13,9 @@ const qtdPedidos = $('#qtdPedido')[0]
 let precoAdiPag = 0
 let precoFrete = 0
 let precoTotal = 0
+let qtdAdi = 0
+let limite = 0
+let limiteCremes = 0
 let volumeAcai
 
 gerarCardsAcai()
@@ -22,7 +25,7 @@ quantidadePedidos()
 // $('.prox2').trigger('click')
 // $('.finalizar').trigger('click')
 $('.troco').hide()
-
+$('.finalizar').hide()
 const cards = document.querySelectorAll(".card")
 const tituloModais = document.querySelectorAll(".tituloModais")
 
@@ -35,7 +38,17 @@ cards.forEach((e)=>{
             element.innerHTML = `Açaí ${e.dataset.vol}`
         })
         volumeAcai = e.dataset.vol
-
+        
+        acais.forEach(element =>{
+            if(element.volume == e.dataset.vol){
+                limite = element.limite
+                limiteCremes = element.limiteCremes
+            }
+        })
+        
+        $('.descCremes')[0].innerHTML = `Quantidade de cremes: ${limiteCremes}`
+        $('.descAdi')[0].innerHTML = `Quantidade de adicionais: ${limite}`
+        
     })
 })
 
@@ -151,10 +164,43 @@ selectBairro.addEventListener("change", (e)=>{
     
 })
 
-// $('.prox2').click(()=>{
-//     gerarTabelaResumo()
-    
-// })
+//limitando a quantidade de adicionais
+adicionais.forEach(e =>{
+    e.addEventListener('click', () =>{
+        // limitarCremes(e)
+        qtdAdi = 0
+        adicionais.forEach(element =>{
+            if(element.checked){
+                qtdAdi++
+                
+            }
+        })
+
+        if(qtdAdi > limite){
+            e.checked = false
+        }
+        console.log(qtdAdi)
+    })
+})
+
+//limitando a quantidade de cremes
+cremes.forEach(e =>{
+    e.addEventListener('click', () =>{
+        // limitarCremes(e)
+        qtdCremes = 0
+        cremes.forEach(element =>{
+            if(element.checked){
+                qtdCremes++
+                
+            }
+        })
+
+        if(qtdCremes > limiteCremes){
+            e.checked = false
+        }
+        console.log(qtdCremes)
+    })
+})
 
 $('.finalizar').click(() =>{
     selectBairro.options[0].selected = true
@@ -171,6 +217,7 @@ $('.prox').click(()=>{
 
 $('.adicionarCarrinho').click(() =>{
     adicionar()
+    gerarBadgeCarrinho()
 })
 
 $('.verCompleto').click(() =>{
@@ -214,15 +261,20 @@ function somarAdicionais(){
 }
 
 function redirecionar(){
-    const cTipo = encodeURI("Tradicional")
-    const cVolume = encodeURI(volumeAcai)
-    const cCreme = encodeURI(stringCremes)
-    const cAdicionais = encodeURI(stringAdicionais)
-    const cEndereco = encodeURI("variavel")
-    const cPagamento = encodeURI("variavel")
-    const cPreco = encodeURI("variavel")
 
-    const texto = `%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D%0D%0AMENSSAGEM%20PADR%C3%83O%0D%0A---------------------------%0D%0ATipo%20de%20A%C3%A7a%C3%AD%3A%20${cTipo}%20%0D%0AVolume%3A%20${cVolume}%20%0D%0A Cremes%3A%20${cCreme}%20%0D%0AAdicionais%3A%20${cAdicionais}%20%0D%0A---------------------------%0D%0AEndere%C3%A7o%3A%20${cEndereco}%20%0D%0A---------------------------%0D%0APre%C3%A7o%20Total%3A%20${cPreco}%20%0D%0A---------------------------%0D%0APagamento%3A%20${cPagamento}%20%0D%0A ---------------------------%0D%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D`
+    /*
+    pedidoCompleto[5] = BRL(totalPedido).format()
+    */
+    const nome = encodeURI(pedidoCompleto[2])
+    const bairro = encodeURI(pedidoCompleto[0])
+    const endereco = encodeURI(pedidoCompleto[1])
+    const numero = encodeURI(pedidoCompleto[3])
+    const total = encodeURI(pedidoCompleto[5])
+    const pagamento = encodeURI(pedidoCompleto[4])
+    let texto  = `%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%0AHero%27s%20A%C3%A7a%C3%AD%0A----------------------------------------%0ANome%20do%20Cliente%3A%20${nome}%0A%0ABairro%3A%20${bairro}%0A%0AEndere%C3%A7o%3A%20${endereco}%0A%0ANumero%3A%20${numero}%0A----------------------------------------%0APedidos%3A%0A`
+    let pedidosURL = itensCarrinhoURL()
+    texto += pedidosURL
+    texto += `%0APre%C3%A7o%20Total%3A%20${total}%0A%0APagamento%3A%20${pagamento}%0A%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-`
 
     let url = `https://api.whatsapp.com/send?phone=5588988638419&text=${texto}`
 
@@ -232,12 +284,14 @@ function redirecionar(){
 function gerarCardsAcai(){
     acais.map((e)=>{
         $(colCards).append(`<div class="card mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
-    <div class="col-md-8">
-        <div class="card-body">
-            <h5 class="card-title">Açaí ${e.volume}</h5>
-            <p class="card-text">${e.precoString}</p>
-        </div>
-    </div>
+        <div class="row g-0">
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <h5 class="card-title">Açaí ${e.volume}</h5>
+                    <p class="card-text">${e.precoString}</p>
+                </div>
+            </div>
+        </div>  
     </div>`)
     })
 }
@@ -482,6 +536,9 @@ function enviar(){
     pedidoCompleto[3] = numero
     pedidoCompleto[5] = BRL(totalPedido).format()
 
+    // itensCarrinhoURL()
+    redirecionar()
+    
 }
 
 function removerChecked(){
@@ -537,3 +594,29 @@ function gerarTabelaCarrinho(){
         
     })
 }
+
+function itensCarrinhoURL(){
+    let itensURL = ''
+
+    carrinho.forEach(e =>{
+        const qtd = encodeURI(e.qtd)
+        const volume = encodeURI(e.volume)
+        const cremes = encodeURI(e.cremes)
+        const adicionais = encodeURI(e.adicionais)
+        const adicionaisPagos = encodeURI(e.adicionaisPagos)
+        const precoPedido = encodeURI(e.precoPedido)
+
+        itensURL += `%0AQuantidade%3A%20${qtd}x%0A%0AVolume%3A%20${volume}%0A%0ACremes%3A%20${cremes}%0A%0AAdicionais%3A%20${adicionais}%0A%0AAdicionais%20pagos%3A%20${adicionaisPagos}%0A%0APre%C3%A7o%3A%20${precoPedido}%0A%0A----------------------------------------`
+    })
+
+    // console.log(itensURL)
+    return itensURL
+}
+
+function gerarBadgeCarrinho(){
+    $('.finalizar').show()
+    $('.qtdCarrinho')[0].innerHTML = carrinho.length
+}
+
+
+
