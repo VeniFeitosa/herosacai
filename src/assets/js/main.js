@@ -49,8 +49,8 @@ cards.forEach((e)=>{
             }
         })
         
-        $('.descCremes')[0].innerHTML = `Quantidade de cremes: ${limiteCremes}`
-        $('.descAdi')[0].innerHTML = `Quantidade de adicionais: ${limite}`
+        $('.descCremes')[0].innerHTML = `Limite de cremes: ${limiteCremes}`
+        $('.descAdi')[0].innerHTML = `Limite de adicionais: ${limite}`
         
     })
 })
@@ -328,13 +328,29 @@ function redirecionar(){
 }   
 
 function gerarCardsAcai(){
+    /*
+    acais.forEach(element =>{
+            if(element.volume == e.dataset.vol){
+                limite = element.limite
+                limiteCremes = element.limiteCremes
+            }
+        })
+        
+        $('.descCremes')[0].innerHTML = `Quantidade de cremes: ${limiteCremes}`
+        $('.descAdi')[0].innerHTML = `Quantidade de adicionais: ${limite}` */
     acais.map((e)=>{
         $(colCards).append(`<div class="card cardAcai mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
         <div class="row g-0">
             <div class="col-sm-8">
                 <div class="card-body">
-                    <h5 class="card-title">Açaí ${e.volume}</h5>
-                    <p class="card-text">${e.precoString}</p>
+                    <div class="row">
+                        <div class="col d-flex justify-content-between">
+                            <h5 class="card-title">Açaí ${e.volume}</h5>
+                            <h5>${e.precoString}</h5>
+                        </div>
+                    </div>
+                    <div class="card-text text-muted">Limite de cremes: ${e.limiteCremes}</div>
+                    <div class="card-text text-muted">Limite de adicionais: ${e.limite}</div>
                 </div>
             </div>
         </div>  
