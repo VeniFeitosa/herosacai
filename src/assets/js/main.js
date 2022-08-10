@@ -1,8 +1,8 @@
-import {acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
+import {tiposAcai, acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
 import $ from 'jquery'
 import index_umd from 'bootstrap'
-import teste from '../img/trash3.svg'
-// console.log(teste)
+import trashIcon from '../img/trash3.svg'
+// console.log(trashIcon)
 const BRL = value => currency(value, { symbol: 'R$ ', decimal: ',', separator: '.' });
 
 const colCards = document.querySelector(".colCards")
@@ -63,6 +63,7 @@ const cremes = document.querySelectorAll(".creme")
 const adicionais = document.querySelectorAll(".adi")
 const adicionaisPagos = document.querySelectorAll(".adiPag")
 
+let tipoSelecionado
 let aCremes = []
 let aAdi = []
 let aAdiPag = []
@@ -141,6 +142,13 @@ proximo.addEventListener("click", (e) =>{
     stringAdicionais = aAdi.join(', ')
 
     stringAdicionaisPagos = aAdiPag.join('; ')
+
+    const tipoPedido = document.querySelectorAll(".tipo")
+    tipoPedido.forEach(e =>{
+        if(e.checked){
+            tipoSelecionado = e.labels[0].innerText
+        }
+    })
     // somarAdicionais()
 })
 
@@ -308,12 +316,13 @@ function redirecionar(){
     const numero = encodeURI(pedidoCompleto[3])
     const total = encodeURI(pedidoCompleto[5])
     const pagamento = encodeURI(pedidoCompleto[4])
+    
     let texto  = `%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%0AHero%27s%20A%C3%A7a%C3%AD%0A----------------------------------------%0ANome%20do%20Cliente%3A%20${nome}%0A%0ABairro%3A%20${bairro}%0A%0AEndere%C3%A7o%3A%20${endereco}%0A%0ANumero%3A%20${numero}%0A----------------------------------------%0APedidos%3A%0A`
     let pedidosURL = itensCarrinhoURL()
     texto += pedidosURL
-    texto += `%0APre%C3%A7o%20Total%3A%20${total}%0A%0APagamento%3A%20${pagamento}%0A%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-`
+    texto += `%0ASubtotal%3A%20${BRL(somacarrinho).format()}%0A%0AFrete%3A%20${precoFrete.format()}%0A%0APre%C3%A7o%20Total%3A%20${total}%0A%0APagamento%3A%20${pagamento}%0A%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-`
 
-    let url = `https://api.whatsapp.com/send?phone=5588988638419&text=${texto}`
+    let url = `https://api.whatsapp.com/send?phone=5588994208481&text=${texto}`
 
     window.location.href = url
 }   
@@ -331,6 +340,20 @@ function gerarCardsAcai(){
         </div>  
     </div>`)
     })
+}
+
+function gerarTiposAcai(){
+    tiposAcai.forEach((e, index) =>{
+        // console.log(e)
+        $('.tiposAcai').append(`<li class="list-group-item"><div class="form-check">
+        <input class="form-check-input tipo" type="radio" name="flexRadioDefault" id="tipo${index}">
+        <label class="form-check-label" for="tipo${index}">
+          ${e}
+        </label>
+      </div>
+      </li>`)
+    })
+    // document.querySelector('#tipo0').checked = true
 }
 
 function gerarOpcoesCremes(){
@@ -367,7 +390,7 @@ function gerarModal1(){
     // $(".grupoCremes")[0].innerHTML = ''
     // $(".grupoAdicionais")[0].innerHTML = ''
     // $(".grupoAdicionaisPagos")[0].innerHTML = ''
-
+    gerarTiposAcai()
     gerarOpcoesCremes()
     gerarOpcoesAdicionais()
     gerarOpcoesAdicionaisPagos()
@@ -497,8 +520,10 @@ function gerarTabelaResumo(){
 function adicionar(){
     let preco = calcularPrecoTotal()
     let precoAcaiResumo = saberPrecoAcai()
+    
     const pedido = {
         qtd: `${qtdPedidos.value}`,
+        tipo: tipoSelecionado,
         volume: `Açaí ${volumeAcai} - ${BRL(precoAcaiResumo).format()}`,
         cremes: `${stringCremes}`,
         adicionais: `${stringAdicionais}`,
@@ -508,6 +533,7 @@ function adicionar(){
 
     carrinho.push(pedido)
     console.log(carrinho)
+    
 }
 
 function formaDePagamento(){
@@ -581,6 +607,8 @@ function removerChecked(){
             
         }
     })
+
+    document.querySelector('#tipo0').checked = true
 }
 
 function gerarTabelaCarrinho(){
@@ -600,7 +628,7 @@ function gerarTabelaCarrinho(){
         <div class="row ${index}">
             <div class="col-md-12 itemTitle d-flex align-items-center justify-content-between">
                 <span>(${e.qtd}x) ${e.volume}</span>
-                <img class="excluir" data-index="${index}" src="${teste}" width="24"></img>
+                <img class="excluir" data-index="${index}" src="${trashIcon}" width="24"></img>
             </div>
         </div>`)
 
@@ -633,6 +661,7 @@ function itensCarrinhoURL(){
     let itensURL = ''
 
     carrinho.forEach(e =>{
+        const tipo = encodeURI(e.tipo)
         const qtd = encodeURI(e.qtd)
         const volume = encodeURI(e.volume)
         const cremes = encodeURI(e.cremes)
@@ -640,7 +669,7 @@ function itensCarrinhoURL(){
         const adicionaisPagos = encodeURI(e.adicionaisPagos)
         const precoPedido = encodeURI(e.precoPedido)
 
-        itensURL += `%0AQuantidade%3A%20${qtd}x%0A%0AVolume%3A%20${volume}%0A%0ACremes%3A%20${cremes}%0A%0AAdicionais%3A%20${adicionais}%0A%0AAdicionais%20pagos%3A%20${adicionaisPagos}%0A%0APre%C3%A7o%3A%20${precoPedido}%0A%0A----------------------------------------`
+        itensURL += `%0ATipo%3A%20${tipo}%0A%0AQuantidade%3A%20${qtd}x%0A%0AVolume%3A%20${volume}%0A%0ACremes%3A%20${cremes}%0A%0AAdicionais%3A%20${adicionais}%0A%0AAdicionais%20pagos%3A%20${adicionaisPagos}%0A%0APre%C3%A7o%3A%20${precoPedido}%0A%0A----------------------------------------`
     })
 
     // console.log(itensURL)

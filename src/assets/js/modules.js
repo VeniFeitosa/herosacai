@@ -1,3 +1,5 @@
+export const tiposAcai = ['Açaí tradicional', 'Açaí cremoso', 'Açaí cremoso com morango']
+
 export const acais = [
 {
     volume:"300ml",
@@ -57,15 +59,15 @@ export const saborCremes = [
 },
 {
     sabor:"Creme de Morango",
-    id:"morango"
+    id:"cremeMorango"
 },
 {
     sabor:"Creme de Ovomaltine",
-    id:"ovomaltine"
+    id:"CremeOvomaltine"
 },
 {
     sabor:"Creme de Nutella",
-    id:"nutella"
+    id:"CremeNutella"
 },
 {
     sabor:"Creme Iogurte Grego com Morango",
