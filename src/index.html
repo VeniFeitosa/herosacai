@@ -16,9 +16,9 @@
       </a>
       <button class="btn btn-primary finalizar" data-bs-target="#modal2" data-bs-toggle="modal" style="display: none;">
         <span><img src="./assets/img/cart.svg" alt="" width="28" height="28">
-          <span class="badge text-bg-warning qtdCarrinho"></span>
+          <span class="badge text-bg-danger qtdCarrinho"></span>
         </span>
-        <span style="padding-left: 4px;">Finalizar pedido</span>
+        <span style="padding-left: 4px; font-weight: 600;">Finalizar pedido</span>
       </button>
     </div>
   </nav>
@@ -78,25 +78,25 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          Tipo de Açaí
+          <h5>Tipo de Açaí</h5>
           <hr>
-          <ul class="list-group tiposAcai">
+          <ul class="list-group tiposAcai mb-3">
             <!-- Lista de cremes -->
           </ul>
           
-          Cremes
+          <h5>Cremes</h5>
           <hr>
-          <ul class="list-group grupoCremes">
+          <ul class="list-group grupoCremes mb-3">
             <!-- Lista de cremes -->
           </ul>
 
-          Adicionais
+          <h5>Adicionais</h5>
           <hr>
-          <ul class="list-group grupoAdicionais">
+          <ul class="list-group grupoAdicionais mb-3">
             <!-- Lista de adicionais -->
           </ul>
 
-          Adicionais Pagos
+          <h5>Adicionais Pagos</h5>
           <hr>
           <ul class="list-group grupoAdicionaisPagos">
             <!-- Lista de adicionais pagos -->
@@ -121,7 +121,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col">
-              <div class="row justify-content-center">
+              <div class="row justify-content-center mb-2">
                 <di class="col-6 d-flex justify-content-center">
                   <button type="button" class="btn btn-primary remPedido"></button>
                   <input type="number" id="qtdPedido" value="1">
@@ -135,6 +135,9 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider align-middle">
+                  <tr>
+                    <td class="tipoResumo"></td>
+                  </tr>
                   <tr>
                     <td class="mlResumo"></td>
                   </tr>
@@ -175,6 +178,7 @@
           </span>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+      <form action="#" class="form">
         <div class="modal-body">
           <div class="container-fluid">
             <div class="row mb-2">
@@ -212,11 +216,11 @@
                 </table>
               </div>
             </div>
-
+            
             <div class="row mb-2">
               <div class="col-md-12">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome">
+                <input type="text" class="form-control" id="nome" required>
               </div>
             </div>
 
@@ -224,25 +228,25 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="selectBairro" class="form-label">Selecione o bairro</label>
-                  <select id="selectBairro" class="form-select" aria-label="Default select example">
-                    <option selected value="null"></option>
+                  <select id="selectBairro" class="form-select" aria-label="Default select example" required>
+                    <option selected value="" ></option>
                   </select>
                   <h6 class="frete"></h6>
                 </div>
 
                 <div class="form-group">
                   <label for="endereco" class="form-label">Endereço</label>
-                  <input type="text" class="form-control" id="endereco">
+                  <input type="text" class="form-control" id="endereco" required>
                 </div>
 
                 <div class="form-group">
                   <label for="numero" class="form-label">Número</label>
-                  <input type="text" class="form-control" id="numero">
+                  <input type="text" class="form-control" id="numero" required>
                 </div>
 
                 <div class="form-group">
                   <label for="numero" class="form-label">Complemento/Ponto de referência</label>
-                  <input type="text" class="form-control" id="complemento">
+                  <input type="text" class="form-control" id="complemento" required>
                 </div>
               </div>
             </div>
@@ -252,7 +256,7 @@
                 <label class="form-label">Forma de pagamento</label>
                 <div class="form-group">
                   <div class="form-check">
-                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Dinheiro" value="dinheiro">
+                    <input class="form-check-input radios" type="radio" name="exampleRadios" id="Dinheiro" value="dinheiro" required>
                     <label class="form-check-label" for="dinheiro">
                       Dinheiro
                     </label>
@@ -282,13 +286,14 @@
                 </div>
               </div>
             </div>
-
+          
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary enviar">Enviar pedido</button>
+          <button type="submit" class="btn btn-primary enviar">Enviar pedido</button>
         </div>
+      </form>
       </div>
     </div>
   </div>

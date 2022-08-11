@@ -6,10 +6,12 @@ td{
     width: 32px;
     height: 32px;
     text-align: center;
+    margin-inline: 9px;
+    border-radius: 0.375rem;
 }
 
 .addPedido{
-    background-image: url('../img/plus-square.svg');
+    background-image: url('../img/plus.svg');
     background-size: cover;
     background-position: center;
     width: 32px;
@@ -19,7 +21,7 @@ td{
 }
 
 .remPedido{
-    background-image: url('../img/dash-square.svg');
+    background-image: url('../img/dash.svg');
     background-size: cover;
     background-position: center;
     width: 32px;
@@ -56,6 +58,18 @@ td{
     cursor: pointer;
 }
 
+/* mudando a cor padrão do primary */
+.form-check-input:checked, .btn-primary, .bg-primary {
+    color: black;
+    background-color: #e3ba78 !important;
+    border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.form-check-input:focus, .btn-primary:focus{
+    border-color: rgba(0, 0, 0, 0.25) !important;
+    outline: 0;
+    box-shadow: none;
+}
 
 @media (min-width: 768px){
     .hidden-md-up {

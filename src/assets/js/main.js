@@ -93,21 +93,24 @@ proximo.addEventListener("click", (e) =>{
     aAdi = []
     aAdiPag = []
     precoAdiPag = 0
+    let cremesSelec = 0
+    let adiSelec = 0
+    let adiPagSelec = 0
     cremes.forEach( (e) => {
+
         if(e.checked){
             let eId = e.id
-    
+            cremesSelec++
             const label = document.querySelector(`[data-nome="${eId}"]`)
             aCremes.push(label.innerHTML)
         }
         
 
     })
-    
     adicionais.forEach((e)=>{
         if(e.checked){
             let eId = e.id
-    
+            adiSelec++
             const label = document.querySelector(`[data-nome="${eId}"]`)
             aAdi.push(label.innerHTML)
         }
@@ -116,7 +119,7 @@ proximo.addEventListener("click", (e) =>{
     adicionaisPagos.forEach((e)=>{
         if(e.checked){
             let eId = e.id
-    
+            adiPagSelec++
             const label = document.querySelector(`[data-nome="${eId}"]`)
 
             saborAdicionaisPagos.map((element)=>{
@@ -137,12 +140,27 @@ proximo.addEventListener("click", (e) =>{
         }
     })
     
-    // console.log(aCremes)
-    stringCremes = aCremes.join(', ')
-    
-    stringAdicionais = aAdi.join(', ')
 
-    stringAdicionaisPagos = aAdiPag.join('; ')
+    if(cremesSelec == 0){
+        stringCremes = 'Sem creme'
+    }else{
+        stringCremes = aCremes.join(', ')
+    }
+    
+    if(adiSelec == 0){
+        stringAdicionais = 'Sem adicionais'
+    }else{
+        stringAdicionais = aAdi.join(', ')
+    }
+    
+    if(adiPagSelec == 0){
+        stringAdicionaisPagos = 'Sem adicionais pagos'
+    }else{
+        stringAdicionaisPagos = aAdiPag.join('; ')
+    }
+
+    
+
 
     const tipoPedido = document.querySelectorAll(".tipo")
     tipoPedido.forEach(e =>{
@@ -161,7 +179,7 @@ selectBairro.addEventListener("change", (e)=>{
     precoFrete = BRL(retorno)
     
 
-    if((selectBairro.value == "null")){
+    if((selectBairro.value == "")){
         frete.innerHTML = ''
         $('.freteCarrinho').html(`Frete: Escolha o bairro`)
     }else{
@@ -228,6 +246,7 @@ function excluirDoCarrinho(){
             console.log(carrinho.length)
             if(carrinho.length == 0){
                 $('.finalizar').hide()
+                $('.enviar').hide()
                 $('.msgCarrinho').show()
             }
             calcularPrecoCarrinho()
@@ -262,6 +281,7 @@ $('.adicionarCarrinho').click(() =>{
     adicionar()
     $('.msgCarrinho').hide()
     $('.finalizar').show()
+    $('.enviar').show()
     gerarBadgeCarrinho()
 })
 
@@ -287,8 +307,15 @@ $('.radios').click((e) =>{
     // console.log(e.target.id)
 })
 
-$('.enviar').click(() =>{
+// $('.enviar').click((e) =>{
+//     // e.preventDefault()
+//     enviar()
+// })
+
+$('.form').submit(e =>{
+    console.log("showw")
     enviar()
+    e.preventDefault()
 })
 
 
@@ -317,8 +344,9 @@ function redirecionar(){
     const numero = encodeURI(pedidoCompleto[3])
     const total = encodeURI(pedidoCompleto[5])
     const pagamento = encodeURI(pedidoCompleto[4])
+    const complemento = $('#complemento')[0].value
     
-    let texto  = `%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%0AHero%27s%20A%C3%A7a%C3%AD%0A----------------------------------------%0ANome%20do%20Cliente%3A%20${nome}%0A%0ABairro%3A%20${bairro}%0A%0AEndere%C3%A7o%3A%20${endereco}%0A%0ANumero%3A%20${numero}%0A----------------------------------------%0APedidos%3A%0A`
+    let texto  = `%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%0AHERO%27S%20A%C3%87A%C3%8D%0A----------------------------------------%0ANome%20do%20Cliente%3A%20${nome}%0A%0ABairro%3A%20${bairro}%0A%0AEndere%C3%A7o%3A%20${endereco}%0A%0ANumero%3A%20${numero}%0A%0AComplemento%3A%20${complemento}%0A----------------------------------------%0APedidos%3A%0A`
     let pedidosURL = itensCarrinhoURL()
     texto += pedidosURL
     texto += `%0ASubtotal%3A%20${BRL(somacarrinho).format()}%0A%0AFrete%3A%20${precoFrete.format()}%0A%0APre%C3%A7o%20Total%3A%20${total}%0A%0APagamento%3A%20${pagamento}%0A%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-`
@@ -498,15 +526,20 @@ function calcularPrecoCarrinho(){
 }
 
 function gerarAdiPagResumo(){
-    $('.adiPagResumo').html("")
+    if(stringAdicionaisPagos == 'Sem adicionais pagos'){
+        $('.adiPagResumo').html("Sem adicionais pagos")
+    }else{
+        $('.adiPagResumo').html("")
 
-    aAdiPag.forEach(e =>{
-        $('.adiPagResumo').append(`<p>${e}</p>`)
-    })
+        aAdiPag.forEach(e =>{
+            $('.adiPagResumo').append(`<p>${e}</p>`)
+        })
+    }
+    
 }
 
 function gerarTabelaResumo(){
-
+    const tipoResumo = $('.tipoResumo')[0]
     const mlResumo = $('.mlResumo')[0]
     const cremesResumo = $('.cremesResumo')[0]
     const adiResumo = $('.adiResumo')[0]
@@ -517,7 +550,7 @@ function gerarTabelaResumo(){
     let preco = calcularPrecoTotal()
     let precoAcaiResumo = saberPrecoAcai()
 
-
+    tipoResumo.innerHTML = tipoSelecionado
     mlResumo.innerHTML = `Açaí ${volumeAcai} <strong>${BRL(precoAcaiResumo).format()}</strong>`
     cremesResumo.innerHTML = `${stringCremes}`
     adiResumo.innerHTML = `${stringAdicionais}`
@@ -587,7 +620,6 @@ function enviar(){
     const nome = $('#nome')[0].value
     const endereco = $('#endereco')[0].value
     const numero = $('#numero')[0].value
-    const complemento = $('#complemento')[0].value
     
     const index = selectBairro.selectedIndex
     const bairro = selectBairro.options[index].text

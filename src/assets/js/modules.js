@@ -45,11 +45,12 @@ export const acais = [
 }]
 
 export const saborCremes = [
+// {
+//     sabor:"Sem creme",
+//     id:"semCreme"
+// }
+// ,
 {
-    sabor:"Sem creme",
-    id:"semCreme"
-}
-,{
     sabor:"Creme de Ninho",
     id:"ninho"
 },
@@ -79,10 +80,11 @@ export const saborCremes = [
 }]
 
 export const saborAdicionais = [
-{
-    sabor:"Sem adicionais",
-    id:"semAdi"
-},
+// {
+//     sabor:"Sem adicionais",
+//     id:"semAdi"
+// },
+
 {
     sabor:"Leite em pó",
     id:"lPo"
@@ -201,13 +203,14 @@ export const saborAdicionais = [
 }]
 
 export const saborAdicionaisPagos = [
+// {
+//     sabor:"Sem adicional pago",
+//     id:"semAdiPag",
+//     precoString:"R$ 0,00",
+//     preco: 0
+// }
+// ,
 {
-    sabor:"Sem adicional pago",
-    id:"semAdiPag",
-    precoString:"R$ 0,00",
-    preco: 0
-}
-,{
     sabor:"Leite em pó",
     id:"lPoPAG",
     precoString:"R$ 0,50",
@@ -239,52 +242,52 @@ export const saborAdicionaisPagos = [
 }]
 
 export const bairros2 = [
-{bairro:"7 DE SETEMBRO", freteString: null, frete: null},
-{bairro:"ALTIPLANO", freteString: null, frete: null},
-{bairro:"ALTO DO JUCA", freteString: null, frete: null},
-{bairro: "ALVORADA", freteString: null, frete: null},
-{bairro:"AREIAS I", freteString: null, frete: null},
-{bairro:"AREIAS II", freteString: null, frete: null},
-{bairro:"BASTIANA", freteString: null, frete: null},
-{bairro:"BRASILIA", freteString: null, frete: null},
-{bairro:"BUGI", freteString: null, frete: null},
-{bairro:"CAJUEIRO", freteString: null, frete: null},
-{bairro:"CENTRO", freteString: null, frete: null},
-{bairro:"COCOBÓ", freteString: null, frete: null},
-{bairro:"COHAB 1", freteString: null, frete: null},
-{bairro:"COHAB 2", freteString: null, frete: null},
-{bairro:"ESPLANADA I", freteString: null, frete: null},
-{bairro:"ESPLANADA II", freteString: null, frete: null},
-{bairro:"ESPLENDOR", freteString: null, frete: null},
-{bairro:"FILADELFIA", freteString: null, frete: null},
-{bairro:"FLORES", freteString: null, frete: null},
-{bairro:"Fomento", freteString: null, frete: null},
-{bairro:"INDUSTRIAL", freteString: null, frete: null},
-{bairro:"JARDIM IGUATU", freteString: null, frete: null},
+{bairro:"7 DE SETEMBRO", freteString: null, frete: ""},
+{bairro:"ALTIPLANO", freteString: null, frete: ""},
+{bairro:"ALTO DO JUCA", freteString: null, frete: ""},
+{bairro: "ALVORADA", freteString: null, frete: ""},
+{bairro:"AREIAS I", freteString: null, frete: ""},
+{bairro:"AREIAS II", freteString: null, frete: ""},
+{bairro:"BASTIANA", freteString: null, frete: ""},
+{bairro:"BRASILIA", freteString: null, frete: ""},
+{bairro:"BUGI", freteString: null, frete: ""},
+{bairro:"CAJUEIRO", freteString: null, frete: ""},
+{bairro:"CENTRO", freteString: null, frete: ""},
+{bairro:"COCOBÓ", freteString: null, frete: ""},
+{bairro:"COHAB 1", freteString: null, frete: ""},
+{bairro:"COHAB 2", freteString: null, frete: ""},
+{bairro:"ESPLANADA I", freteString: null, frete: ""},
+{bairro:"ESPLANADA II", freteString: null, frete: ""},
+{bairro:"ESPLENDOR", freteString: null, frete: ""},
+{bairro:"FILADELFIA", freteString: null, frete: ""},
+{bairro:"FLORES", freteString: null, frete: ""},
+{bairro:"Fomento", freteString: null, frete: ""},
+{bairro:"INDUSTRIAL", freteString: null, frete: ""},
+{bairro:"JARDIM IGUATU", freteString: null, frete: ""},
 {bairro:"JARDIM OASIS", freteString: "R$ 2,00", frete: 2},
-{bairro:"JOAO PAULO II", freteString: null, frete: null},
-{bairro:"LAGOA PARK", freteString: null, frete: null},
-{bairro:"NOVA CAJAZEIRAS", freteString: null, frete: null},
-{bairro:"Novo Altiplano", freteString: null, frete: null},
-{bairro:"NOVO IGUATU", freteString: null, frete: null},
-{bairro:"PARANA", freteString: null, frete: null},
-{bairro:"PLANALTO", freteString: null, frete: null},
-{bairro:"PRADO", freteString: null, frete: null},
-{bairro:"PREMIER", freteString: null, frete: null},
-{bairro:"SACRAMENTO LOT", freteString: null, frete: null},
-{bairro:"SANTO ANTONIO", freteString: null, frete: null},
-{bairro:"SAO SEBASTIAO", freteString: null, frete: null},
-{bairro:"TABULEIRO", freteString: null, frete: null},
-{bairro:"TERRA BELLA", freteString: null, frete: null},
-{bairro:"VARJOTA", freteString: null, frete: null},
-{bairro:"VENEZA", freteString: null, frete: null},
-{bairro:"VERDE PARK", freteString: null, frete: null},
-{bairro:"VILA CENTENARIO", freteString: null, frete: null},
-{bairro:"VILA CIDAO", freteString: null, frete: null},
-{bairro:"Vila Coqueiro", freteString: null, frete: null},
-{bairro:"VILA DAAE", freteString: null, frete: null},
-{bairro:"VILA MOURA", freteString: null, frete: null},
-{bairro:"VILA NEUMA", freteString: null, frete: null}
+{bairro:"JOAO PAULO II", freteString: null, frete: ""},
+{bairro:"LAGOA PARK", freteString: null, frete: ""},
+{bairro:"NOVA CAJAZEIRAS", freteString: null, frete: ""},
+{bairro:"Novo Altiplano", freteString: null, frete: ""},
+{bairro:"NOVO IGUATU", freteString: null, frete: ""},
+{bairro:"PARANA", freteString: null, frete: ""},
+{bairro:"PLANALTO", freteString: null, frete: ""},
+{bairro:"PRADO", freteString: null, frete: ""},
+{bairro:"PREMIER", freteString: null, frete: ""},
+{bairro:"SACRAMENTO LOT", freteString: null, frete: ""},
+{bairro:"SANTO ANTONIO", freteString: null, frete: ""},
+{bairro:"SAO SEBASTIAO", freteString: null, frete: ""},
+{bairro:"TABULEIRO", freteString: null, frete: ""},
+{bairro:"TERRA BELLA", freteString: null, frete: ""},
+{bairro:"VARJOTA", freteString: null, frete: ""},
+{bairro:"VENEZA", freteString: null, frete: ""},
+{bairro:"VERDE PARK", freteString: null, frete: ""},
+{bairro:"VILA CENTENARIO", freteString: null, frete: ""},
+{bairro:"VILA CIDAO", freteString: null, frete: ""},
+{bairro:"Vila Coqueiro", freteString: null, frete: ""},
+{bairro:"VILA DAAE", freteString: null, frete: ""},
+{bairro:"VILA MOURA", freteString: null, frete: ""},
+{bairro:"VILA NEUMA", freteString: null, frete: ""}
 ]
 
 export const texto = "%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D%0AMENSSAGEM%20PADR%C3%83O%0A----------------------------------------%0AVolume%3A%20variavel%0A%0ACremes%3A%20variavel%0A%0AAdicionais%3A%20variavel%0A%0AAdicionais%20pagos%3A%20variavel%0A----------------------------------------%0AEndere%C3%A7o%3A%20variavel%20%0A----------------------------------------%0APre%C3%A7o%20dos%20adicionais%20pagos%3A%20variavel%0A%0AFrete%3A%20variavel%20%0A%0APre%C3%A7o%20Total%3A%20variavel%20%0A----------------------------------------%0APagamento%3A%20variavel%20%0A----------------------------------------%0A%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D-%3D"
