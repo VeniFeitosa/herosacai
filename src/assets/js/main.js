@@ -2,6 +2,7 @@ import {tiposAcai, acais, saborCremes, saborAdicionais, saborAdicionaisPagos, ba
 import $ from 'jquery'
 import index_umd from 'bootstrap'
 import trashIcon from '../img/trash3.svg'
+import imgAcai from '../img/acai.png'
 // console.log(trashIcon)
 const BRL = value => currency(value, { symbol: 'R$ ', decimal: ',', separator: '.' });
 
@@ -328,20 +329,13 @@ function redirecionar(){
 }   
 
 function gerarCardsAcai(){
-    /*
-    acais.forEach(element =>{
-            if(element.volume == e.dataset.vol){
-                limite = element.limite
-                limiteCremes = element.limiteCremes
-            }
-        })
-        
-        $('.descCremes')[0].innerHTML = `Quantidade de cremes: ${limiteCremes}`
-        $('.descAdi')[0].innerHTML = `Quantidade de adicionais: ${limite}` */
     acais.map((e)=>{
-        $(colCards).append(`<div class="card cardAcai mb-3" style="max-width: 540px;" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
+        $(colCards).append(`<div class="card cardAcai mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
         <div class="row g-0">
-            <div class="col-sm-8">
+            <div class="col-4 imgAcai">
+                
+            </div>
+            <div class="col-8">
                 <div class="card-body">
                     <div class="row">
                         <div class="col d-flex justify-content-between">

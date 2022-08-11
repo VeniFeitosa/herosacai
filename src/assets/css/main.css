@@ -28,6 +28,12 @@ td{
     border: solid 1px;
 }
 
+.imgAcai{
+    background-image: url('../img/acai.png');
+    background-size: cover;
+    background-position: center;
+}
+
 .remPedido:hover, .addPedido:hover{
     box-shadow: none;
 }
