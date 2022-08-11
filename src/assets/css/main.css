@@ -54,7 +54,7 @@ td{
     align-items: center;
 }
 
-.cardAcai:hover, .excluir:hover{
+.cardAcai:hover, .excluir:hover, .horario:hover{
     cursor: pointer;
 }
 

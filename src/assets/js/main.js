@@ -1,5 +1,5 @@
-import {tiposAcai, acais, saborCremes, saborAdicionais, saborAdicionaisPagos, bairros2} from './modules.js'
-import $ from 'jquery'
+import {tiposAcai, acais, saborCremes, saborAdicionais, saborAdicionaisPagos, semana,  bairros2} from './modules.js'
+import $, { data } from 'jquery'
 import index_umd from 'bootstrap'
 import trashIcon from '../img/trash3.svg'
 import imgAcai from '../img/acai.png'
@@ -25,6 +25,7 @@ let volumeAcai
 gerarCardsAcai()
 gerarSelect()
 gerarModal1()
+horarioFuncionamento()
 quantidadePedidos()
 // $('.prox2').trigger('click')
 // $('.finalizar').trigger('click')
@@ -307,11 +308,6 @@ $('.radios').click((e) =>{
     // console.log(e.target.id)
 })
 
-// $('.enviar').click((e) =>{
-//     // e.preventDefault()
-//     enviar()
-// })
-
 $('.form').submit(e =>{
     console.log("showw")
     enviar()
@@ -360,7 +356,7 @@ function gerarCardsAcai(){
     acais.map((e)=>{
         $(colCards).append(`<div class="card cardAcai mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal" data-vol="${e.volume}">
         <div class="row g-0">
-            <div class="col-4 imgAcai">
+            <div class="col-4 imgAcai rounded-start">
                 
             </div>
             <div class="col-8">
@@ -722,6 +718,49 @@ function gerarBadgeCarrinho(){
 
     // $('.finalizar').show()
     $('.qtdCarrinho')[0].innerHTML = carrinho.length
+}
+
+function horarioFuncionamento(){
+
+    const dataAtual = new Date()
+    const diaSemana = dataAtual.getDay()
+    const horaAtual = dataAtual.getHours()
+    const minutoAtual = dataAtual.getMinutes()
+
+    let horaCompleta = `${horaAtual}:${minutoAtual}`
+    // console.log(`${semana[diaSemana].dia} ${semana[diaSemana].abre} - ${semana[diaSemana].fecha}`)
+    const horarioFechar = semana[diaSemana].fecha
+    // const horarioFechar = "20:00"
+    
+    if(horaCompleta >= horarioFechar){
+        $('.aberto').hide()
+        $('.fechado').show()
+        $('.fechado').html("Fechado")
+        $('.prox').hide()
+    }else{
+        $('.aberto').show()
+        $('.fechado').hide()
+        $('.aberto').html("Aberto")
+        $('.prox').show()
+    }
+
+    semana.forEach((e, index) =>{
+        // console.log(index)
+        if(diaSemana == index){
+            $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+            <span><strong>${e.dia}</strong></span>
+            <span><strong>${e.abre}h - ${e.fecha}h</strong></span>
+            </li>`)
+        }else{
+            $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+            <span>${e.dia}</span>
+            <span>${e.abre}h - ${e.fecha}h</span>
+            </li>`)
+        }
+        
+    })
+
+    // console.log(`${semana[diaSemana]} ${horaCompleta}`)
 }
 
 // function controlarCarrinho(){

@@ -241,6 +241,44 @@ export const saborAdicionaisPagos = [
     preco:  0.50
 }]
 
+export const semana = [
+{
+    dia:"Domingo",
+    abre:"14:00",
+    fecha:"22:30"
+},
+{
+    dia:"Segunda-Feira",
+    abre:"18:30",
+    fecha:"22:30"
+},
+{
+    dia:"Terça-Feira",
+    abre:"18:30",
+    fecha:"22:30"
+},
+{
+    dia:"Quarta-Feira",
+    abre:"18:30",
+    fecha:"22:30"
+},
+{
+    dia:"Quinta-Feira",
+    abre:"18:30",
+    fecha:"22:30"
+},
+{
+    dia:"Sexta-Feira",
+    abre:"18:30",
+    fecha:"22:30"
+},
+{
+    dia:"Sábado",
+    abre:"14:00",
+    fecha:"22:30"
+} 
+]
+
 export const bairros2 = [
 {bairro:"7 DE SETEMBRO", freteString: null, frete: ""},
 {bairro:"ALTIPLANO", freteString: null, frete: ""},

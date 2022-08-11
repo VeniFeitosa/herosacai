@@ -9,7 +9,7 @@
     <title>Hero's Açaí</title>
 </head>
 <body>
-  <nav class="navbar sticky-top mb-3" style="background-color: rgb(72 39 131 / 90%);">
+  <nav class="navbar sticky-top mb-3" style="background-color: rgb(72 39 131 / 95%);">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="./assets/img/logo.png" alt="" width="80" height="80">
@@ -27,9 +27,23 @@
         <div class="col">
           <div class="card" style="max-width: 620px;
           margin: auto;">
-            <div class="card-body text-center">
-              <!-- <h5>Inevitável não se apaixonar</h5> -->
-              <p class="card-text">Inevitável não se apaixonar</p>
+            <div class="card-body">
+              <div class="row">
+                <div class="col horario" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <span class="badge text-bg-success aberto">Aberto</span>
+                    <span class="badge text-bg-danger fechado" style="display: none;">Fechado</span>
+                    <span class="text-success fw-bold d-flex aling-items-center">Ver Horário de Funcionamento <img src="./assets/img/zoom-in.svg" alt="" class="mx-1"></span>
+                </div>
+              </div>
+
+              <p class="card-text">
+                
+                <!-- <strong>Pedido mínimo: <span class="text-success">R$ 10,00</span></strong> -->
+              </p>
+              
+              <span>
+                Inevitável não se apaixonar
+              </span>
             </div>
           </div>
         </div>
@@ -63,6 +77,32 @@
       
     </div>
     
+    <!-- Offcanvas -->
+    <div class="offcanvas offcanvas-end" data-bs-scroll="false" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+      <div class="offcanvas-header justify-content-end">
+        <!-- <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Horário</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <!-- <p>Try scrolling the rest of the page to see this option in action.</p> -->
+        <div class="card">
+          <div class="card-body">
+            <p><strong class="text-success"><img src="./assets/img/clock-history.svg" alt=""> Horário de funcionamento</strong></p>
+            <ul class="list-group list-group-flush funcionamento mb-3">
+            </ul>
+            <p><strong class="text-success"><img src="./assets/img/cash-coin.svg" alt=""> Formas de pagamento</strong></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Dinheiro</li>
+              <li class="list-group-item">Pix</li>
+              <li class="list-group-item">Cartão de crédito - Na máquina</li>
+              <li class="list-group-item">Cartão de débito - Na máquina</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     
     <!-- Button trigger modal -->
   <!-- Modal -->
@@ -274,13 +314,13 @@
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Credito" value="credito">
                     <label class="form-check-label" for="credito">
-                      Cartão de Crédito - Na máquina
+                      Cartão de crédito - Na máquina
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Debito" value="debito">
                     <label class="form-check-label" for="debito">
-                      Cartão de Débito - Na máquina
+                      Cartão de débito - Na máquina
                     </label>
                   </div>
                 </div>
