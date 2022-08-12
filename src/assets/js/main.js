@@ -727,12 +727,13 @@ function horarioFuncionamento(){
     const horaAtual = dataAtual.getHours()
     const minutoAtual = dataAtual.getMinutes()
 
-    let horaCompleta = `${horaAtual}:${minutoAtual}`
+    let horaCompleta = `${horaAtual}:${(minutoAtual < 10)? "0" + minutoAtual : minutoAtual}`
     // console.log(`${semana[diaSemana].dia} ${semana[diaSemana].abre} - ${semana[diaSemana].fecha}`)
     const horarioFechar = semana[diaSemana].fecha
     // const horarioFechar = "20:00"
-    
-    if(horaCompleta >= horarioFechar || semana[diaSemana].fechado){
+    console.log(horaCompleta)
+    console.log(horarioFechar)
+    if(horaCompleta >= horarioFechar){
         $('.aberto').hide()
         $('.fechado').show()
         $('.fechado').html("Fechado")
