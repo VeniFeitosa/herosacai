@@ -255,7 +255,8 @@ export const semana = [
 {
     dia:"Terça-Feira",
     abre:"18:30",
-    fecha:"22:30"
+    fecha:"22:30",
+    fechado: true
 },
 {
     dia:"Quarta-Feira",

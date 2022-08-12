@@ -732,7 +732,7 @@ function horarioFuncionamento(){
     const horarioFechar = semana[diaSemana].fecha
     // const horarioFechar = "20:00"
     
-    if(horaCompleta >= horarioFechar){
+    if(horaCompleta >= horarioFechar || semana[diaSemana].fechado){
         $('.aberto').hide()
         $('.fechado').show()
         $('.fechado').html("Fechado")
@@ -746,17 +746,33 @@ function horarioFuncionamento(){
 
     semana.forEach((e, index) =>{
         // console.log(index)
-        if(diaSemana == index){
-            $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
-            <span><strong>${e.dia}</strong></span>
-            <span><strong>${e.abre}h - ${e.fecha}h</strong></span>
-            </li>`)
+        if(e.fechado){
+            console.log(`${e.dia} é fechado`)
+            if(diaSemana == index){
+                $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+                <span><strong>${e.dia}</strong></span>
+                <span><strong>Fechado</strong></span>
+                </li>`)
+            }else{
+                $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+                <span>${e.dia}</span>
+                <span>Fechado</span>
+                </li>`)
+            }
         }else{
-            $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
-            <span>${e.dia}</span>
-            <span>${e.abre}h - ${e.fecha}h</span>
-            </li>`)
+            if(diaSemana == index){
+                $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+                <span><strong>${e.dia}</strong></span>
+                <span><strong>${e.abre}h - ${e.fecha}h</strong></span>
+                </li>`)
+            }else{
+                $('.funcionamento').append(`<li class="list-group-item d-flex justify-content-between">
+                <span>${e.dia}</span>
+                <span>${e.abre}h - ${e.fecha}h</span>
+                </li>`)
+            }
         }
+        
         
     })
 
