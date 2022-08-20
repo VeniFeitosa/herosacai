@@ -1,10 +1,158 @@
 import {tiposAcai, acais, saborCremes, saborAdicionais, saborAdicionaisPagos, semana,  bairros2} from './modules.js'
-import $, { data } from 'jquery'
-import index_umd from 'bootstrap'
-import trashIcon from '../img/trash3.svg'
-import imgAcai from '../img/acai.png'
+// import $, { data } from 'jquery'
+// import index_umd from 'bootstrap'
+// import trashIcon from '../img/trash3.svg'
+// import imgAcai from '../img/acai.png'
 // console.log(trashIcon)
+
+//CONFIGURAÇÕES
 const BRL = value => currency(value, { symbol: 'R$ ', decimal: ',', separator: '.' });
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "1500",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+  }
+
+
+$('.logar').submit(e =>{
+    e.preventDefault()
+    const form = $('.logar')[0]
+
+    const formData = new FormData(form)
+
+    fetch('http://localhost:8000/src/assets/php/logar.php', {
+        method: 'post',
+        body: formData
+    }).then(res => res.json()).then(response =>{
+        // console.log(response)
+        console.log(response)
+        
+        if(!response.erro){
+            // console.log("redirecionar")
+            window.location.href = "http://localhost:8000/src/dashboard.php";
+        }
+        // response.users.forEach(e =>{
+        //     console.log(e)
+        // })
+    }).catch(error => console.log(error))
+
+})
+
+
+
+$('.sair').click(e =>{
+    e.preventDefault()
+    // console.log("sair")
+
+    fetch('http://localhost:8000/src/assets/php/sair.php', {
+    }).then(e => {
+        // console.log('teste')
+        window.location.href = "http://localhost:8000/src/admin.php"
+    }).catch(error => console.log(error))
+})
+
+$('.formAddTipo').submit(e =>{
+    e.preventDefault()
+    
+    const form = $('.formAddTipo')[0]
+
+    const formData = new FormData(form)
+    fetch('http://localhost:8000/src/assets/php/add/add_tipo.php', {
+        method: 'post',
+        body: formData
+    }).then(res => res.json()).then(response =>{
+        console.log(response)
+
+        if(!response.erro){
+            toastr.success(response.mensagem)
+        }else{
+            toastr.error(response.mensagem)
+        }
+        
+    }).catch(error => console.log(error))
+})
+
+$('.li-editar-tipo').click(e =>{
+    $('.dispoTipo').html('')
+    fetch('http://localhost:8000/src/assets/php/edit/edit_tipo.php').then(res => res.json()).then(response =>{
+        // console.log(response)
+        response.tipos.forEach(element =>{
+            gerarEditarTipo(element.id, element.tipo, element.falta)
+        })
+    }).catch(error => console.log(error))
+})
+
+$('.salv-editar-tipo').click(e =>{
+    const tiposSelecionados = document.querySelectorAll('.edi-item-tipo')
+    let checkeds = [];
+    let uncheckds = [];
+    tiposSelecionados.forEach(element =>{
+        if(element.checked){
+            // console.log(element.labels[0].innerText)
+            // checkeds.push(element.labels[0].innerText)
+            let id = element.id
+            checkeds.push(id.replace('tipo', ''))
+        }else{
+            let id = element.id
+            uncheckds.push(id.replace('tipo', ''))
+        }
+    })
+    let data = {checkeds: checkeds, uncheckds: uncheckds}
+
+    fetch('http://localhost:8000/src/assets/php/edit/save_tipo.php', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    }).then(res => res.json()).then(response =>{
+        if(!response.erro){
+            toastr.success(response.mensagem)
+        }else{
+            toastr.error(response.mensagem)
+        }
+    }).catch(error => console.log(error))
+
+})
+
+$('.li-excluir-tipo').click(e =>{
+    $('.excluirTipo').html('')
+    fetch('http://localhost:8000/src/assets/php/edit/edit_tipo.php').then(res => res.json()).then(response =>{
+        // console.log(response)
+        response.tipos.forEach(element =>{
+            gerarExcluirTipo(element.id, element.tipo)
+        })
+    }).catch(error => console.log(error))
+})
+
+// fetch('http://localhost:8000/src/assets/php/teste.php').then(res => res.json()).then(response =>{
+//     // console.log(response)
+//     console.log(response)
+//     // response.users.forEach(e =>{
+//     //     console.log(e)
+//     // })
+// }).catch(error => console.log(error))
+
+// $('.horario').click(e =>{
+//     console.log("clicou")
+
+//     fetch('http://localhost:8000/src/assets/php/teste.php').then(res => res.json()).then(response =>{
+//         // console.log(response)
+//         console.log(response)
+//         // response.users.forEach(e =>{
+//         //     console.log(e)
+//         // })
+//     }).catch(error => console.log(error))
+// })
 
 const colCards = document.querySelector(".colCards")
 const grupoCremes = document.querySelector(".grupoCremes")
@@ -666,7 +814,7 @@ function gerarTabelaCarrinho(){
         <div class="row ${index}">
             <div class="col-md-12 itemTitle d-flex align-items-center justify-content-between">
                 <span>(${e.qtd}x) ${e.volume}</span>
-                <img class="excluir" data-index="${index}" src="${trashIcon}" width="24"></img>
+                <img class="excluir" data-index="${index}" src="./assets/img/trash3.svg" width="24"></img>
             </div>
         </div>`)
 
@@ -777,13 +925,29 @@ function horarioFuncionamento(){
         
     })
 
-    // console.log(`${semana[diaSemana]} ${horaCompleta}`)
 }
 
-// function controlarCarrinho(){
-//     console.log(carrinho.length)
-//     $('.finalizar').show()
-   
-    
-// }
+function gerarEditarTipo(id, tipo, falta){
+    if(!falta){
+        $('.dispoTipo').append(`<li class="list-group-item">
+        <input class="form-check-input edi-item-tipo" type="checkbox" value="" id="tipo${id}">
+        <label class="form-check-label" for="tipo${id}">
+            ${tipo}
+        </label>
+   </li>`)
+    }else{
+        $('.dispoTipo').append(`<li class="list-group-item">
+        <input class="form-check-input edi-item-tipo" type="checkbox" value="" id="tipo${id}" checked>
+        <label class="form-check-label" for="tipo${id}">
+            ${tipo}
+        </label>
+   </li>`)        
+    }
+}
 
+function gerarExcluirTipo(id, tipo){
+    $('.excluirTipo').append(`<li class="list-group-item d-flex align-items-center justify-content-between">
+    <span>${tipo}</span>
+    <img class="excluir-tipo" data-index_tipo="${id}" src="./assets/img/trash3.svg" width="24"></img>
+    </li>`)
+}

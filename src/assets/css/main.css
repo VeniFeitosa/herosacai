@@ -71,8 +71,35 @@ td{
     box-shadow: none;
 }
 
+li:hover{
+    cursor: pointer;
+}
+
 @media (min-width: 768px){
     .hidden-md-up {
         display: none!important;
+    }
+}
+
+@media (min-width: 768px){
+    .navDash{
+        display: none;
+    }
+    
+}
+
+@media (max-width: 768px){
+    .sideMenu{
+        display: none;
+    }
+    /* .container-main{
+        padding-right: 0px;
+        padding-left: 0px;
+    } */
+}
+
+@media (width: 768px){
+    .sideMenu{
+        display: flex;
     }
 }
