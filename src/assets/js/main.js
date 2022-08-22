@@ -37,6 +37,12 @@ $('.logar').submit(e =>{
         if(!response.erro){
             // console.log("redirecionar")
             window.location.href = "http://localhost:8000/src/dashboard.php";
+        }else{
+            if(!response.erro){
+                toastr.success(response.mensagem)
+            }else{
+                toastr.error(response.mensagem)
+            }
         }
         // response.users.forEach(e =>{
         //     console.log(e)
@@ -995,7 +1001,7 @@ function gerarCardsAcai(){
 function gerarTiposAcai(){
     fetch('http://localhost:8000/src/assets/php/edit/edit_tipo.php').then(res => res.json())
     .then(response =>{
-        console.log(response.tipos)
+        // console.log(response.tipos)
         const tiposAcai = response.tipos
         tiposAcai.forEach((e, index) =>{
             if(!e.falta){
@@ -1034,7 +1040,7 @@ function gerarTiposAcai(){
 function gerarOpcoesCremes(){
     fetch('http://localhost:8000/src/assets/php/edit/edit_creme.php').then(res => res.json())
     .then(response =>{
-        console.log(response.cremes)
+        // console.log(response.cremes)
         const saborCremes = response.cremes
 
         saborCremes.map((e)=>{
@@ -1084,7 +1090,7 @@ function gerarOpcoesCremes(){
 function gerarOpcoesAdicionais(){
     fetch('http://localhost:8000/src/assets/php/edit/edit_adi.php').then(res => res.json())
     .then(response =>{
-        console.log(response.adicionais)
+        // console.log(response.adicionais)
         const saborAdicionais = response.adicionais
         saborAdicionais.map((e)=>{
             if(!e.falta){
@@ -1136,7 +1142,7 @@ function gerarOpcoesAdicionaisPagos(){
 
     fetch('http://localhost:8000/src/assets/php/edit/edit_adiPag.php').then(res => res.json())
     .then(response =>{
-        console.log(response.adicionaisPag)
+        // console.log(response.adicionaisPag)
         const adicionaisPag = response.adicionaisPag
         adicionaisPag.map((e)=>{
             if(!e.falta){
@@ -1493,10 +1499,14 @@ function horarioFuncionamento(){
     let horaCompleta = `${horaAtual}:${(minutoAtual < 10)? "0" + minutoAtual : minutoAtual}`
     // console.log(`${semana[diaSemana].dia} ${semana[diaSemana].abre} - ${semana[diaSemana].fecha}`)
     const horarioFechar = semana[diaSemana].fecha
+    const horarioAbrir = semana[diaSemana].abre
     // const horarioFechar = "20:00"
     console.log(horaCompleta)
     console.log(horarioFechar)
-    if(horaCompleta >= horarioFechar){
+    console.log(horarioAbrir)
+    console.log(horarioAbrir > horaCompleta)
+    // horaCompleta >= horarioFechar || horarioAbrir > horaCompleta
+    if(false){
         $('.aberto').hide()
         $('.fechado').show()
         $('.fechado').html("Fechado")

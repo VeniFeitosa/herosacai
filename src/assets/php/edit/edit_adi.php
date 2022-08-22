@@ -17,7 +17,7 @@ $api['mensagem'] = '';
 //     die();
 // }
 
-$sql = $db->prepare("SELECT * FROM adicionais");
+$sql = $db->prepare("SELECT * FROM adicionais ORDER BY sabor");
 $sql->execute();
 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 

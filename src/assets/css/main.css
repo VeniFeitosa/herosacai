@@ -72,11 +72,21 @@ td{
     border-color: rgba(0, 0, 0, 0.25) !important;
 }
 
+.accordion-button:focus{
+    box-shadow: none;
+}
 
-
-.accordion-button, .logar{
+.accordion-button, .logar, .accordion-button:not(.collapsed){
     background-color: #D0C3EE;
     color: #2f0147;
+}
+
+.accordion-button:not(.collapsed)::after{
+    background-image: url('../img/arrow.svg');
+}
+
+.accordion-button::after{
+    background-image: url('../img/arrow.svg');
 }
 
 .accordion-item{
@@ -105,7 +115,8 @@ td{
     box-shadow: none;
 }
 
-.menu:hover, .excluir-tipo:hover,.excluir-acai, .excluir-creme:hover, .excluir-adi:hover, .excluir-adiPag:hover{
+.menu:hover, .excluir-tipo:hover,.excluir-acai, .excluir-creme:hover, .excluir-adi:hover,
+.excluir-adiPag:hover, .form-check-input:hover, .form-check-label:hover{
     cursor: pointer;
 }
 
