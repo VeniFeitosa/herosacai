@@ -28,9 +28,14 @@
             </div>
         </div> -->
         <div class="row">
-            <div class="col" style="display: flex;justify-content: center;">
-                <div class="form-container" style="width: fit-content;">
-                    <form class="logar">
+            <div class="col" style="display: flex;justify-content: center;height: 100vh; align-items:center;">
+                <div class="form-container" style="">
+                    <form class="logar rounded shadow p-3">
+                        <div class="row">
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <img src="./assets/img/logo.png" alt="" width="100" height="100">
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Login</label>
                             <input type="text" class="form-control" name="login" id="login" required>
@@ -47,6 +52,7 @@
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="./assets/js/currency.min.js"></script> -->
 <script type="module" src="./assets/js/main.js"></script>
 </body>

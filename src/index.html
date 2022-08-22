@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href=".././node_modules/bootstrap/dist/css/bootstrap.css"> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
@@ -229,7 +230,9 @@
               <div class="col-md-12">
                 <div class="card">
                   <div class="card-body corpoItens">
-        
+                    <div class="msgCarrinho" style="display: none;">
+                      <p class="fw-bold">Sem itens no carrinho</p>
+                    </div>  
                     <div class="row">
                       <div class="col-md-12 itemTitle">
                         Açaí 300ml
@@ -301,7 +304,7 @@
                 <div class="form-group">
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Dinheiro" value="dinheiro" required>
-                    <label class="form-check-label" for="dinheiro">
+                    <label class="form-check-label" for="Dinheiro">
                       Dinheiro
                     </label>
                   </div>
@@ -311,19 +314,19 @@
                   </div>
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Pix" value="pix">
-                    <label class="form-check-label" for="pix">
+                    <label class="form-check-label" for="Pix">
                       Pix
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Credito" value="credito">
-                    <label class="form-check-label" for="credito">
+                    <label class="form-check-label" for="Credito">
                       Cartão de crédito - Na máquina
                     </label>
                   </div>
                   <div class="form-check">
                     <input class="form-check-input radios" type="radio" name="exampleRadios" id="Debito" value="debito">
-                    <label class="form-check-label" for="debito">
+                    <label class="form-check-label" for="Debito">
                       Cartão de débito - Na máquina
                     </label>
                   </div>

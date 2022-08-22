@@ -27,7 +27,7 @@ $uncheckds = $post['uncheckds'];
 for ($i=0; $i < sizeof($checkeds); $i++) { 
     $id = $checkeds[$i];
 
-    $sql = $db->prepare("UPDATE tipo_acai SET falta = 1 WHERE id = ?");
+    $sql = $db->prepare("UPDATE adicionais SET falta = 1 WHERE id = ?");
     $sql->bindParam(1, $id);
 
     if($sql->execute()){
@@ -43,7 +43,7 @@ for ($i=0; $i < sizeof($checkeds); $i++) {
 for ($i=0; $i < sizeof($uncheckds); $i++) { 
     $id = $uncheckds[$i];
 
-    $sql = $db->prepare("UPDATE tipo_acai SET falta = 0 WHERE id = ?");
+    $sql = $db->prepare("UPDATE adicionais SET falta = 0 WHERE id = ?");
     $sql->bindParam(1, $id);
 
     if($sql->execute()){

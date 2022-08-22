@@ -17,10 +17,10 @@ $api['mensagem'] = '';
 //     die();
 // }
 
-$sql = $db->prepare("SELECT * FROM tipo_acai ORDER BY tipo");
+$sql = $db->prepare("SELECT * FROM acais");
 $sql->execute();
 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-$api['tipos'] = $result;
+$api['acais'] = $result;
 
 echo json_encode($api);

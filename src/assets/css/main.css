@@ -3,7 +3,7 @@ td{
 }
 
 #qtdPedido{
-    width: 32px;
+    width: 40px;
     height: 32px;
     text-align: center;
     margin-inline: 9px;
@@ -54,15 +54,49 @@ td{
     align-items: center;
 }
 
+.dispoAdi, .excluirAdi, .dispoAdiPag, .excluirAdiPag{
+    height: 355px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
 .cardAcai:hover, .excluir:hover, .horario:hover{
     cursor: pointer;
 }
 
 /* mudando a cor padrão do primary */
 .form-check-input:checked, .btn-primary, .bg-primary {
-    color: black;
-    background-color: #e3ba78 !important;
+    color: white;
+    background-color: #8367c7 !important;
+    /* background-color: #e3ba78 !important; */
     border-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+
+
+.accordion-button, .logar{
+    background-color: #D0C3EE;
+    color: #2f0147;
+}
+
+.accordion-item{
+    border: none;
+}
+
+.navbar-toggler-icon{
+    background-image: url('../img/download.svg');
+}
+
+.navbar-toggler:focus{
+    text-decoration: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed{
+    /* border-radius: none!important; */
+    border-bottom-right-radius: 0!important;
+    border-bottom-left-radius: 0!important;
 }
 
 .form-check-input:focus, .btn-primary:focus{
@@ -71,7 +105,7 @@ td{
     box-shadow: none;
 }
 
-li:hover{
+.menu:hover, .excluir-tipo:hover,.excluir-acai, .excluir-creme:hover, .excluir-adi:hover, .excluir-adiPag:hover{
     cursor: pointer;
 }
 
@@ -85,13 +119,16 @@ li:hover{
     .navDash{
         display: none;
     }
-    
+    .card.shadow{
+        width: 70%;
+    }
 }
 
 @media (max-width: 768px){
-    .sideMenu{
+    .sideMenu, .navLg{
         display: none;
     }
+
     /* .container-main{
         padding-right: 0px;
         padding-left: 0px;
@@ -99,7 +136,7 @@ li:hover{
 }
 
 @media (width: 768px){
-    .sideMenu{
+    .sideMenu, .navLg{
         display: flex;
     }
 }
